@@ -24,7 +24,7 @@ public final class Constants {
     //Drive Characteristics
     public static int maxDriveRPM = 495;
 
-    //PID Gains
+    //PID Gains (to be tuned)
     public static Gains leftDriveGains  = new Gains(0.3053, 0, 0, 0);
     public static Gains rightDriveGains = new Gains(0.3053, 0, 0, 0);
     
