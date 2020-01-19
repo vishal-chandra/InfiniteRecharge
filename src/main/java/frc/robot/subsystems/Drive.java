@@ -156,8 +156,8 @@ public class Drive extends SubsystemBase {
    */
   double commandToTargetVelocity(double command) {
 
-    //convert command to RPM, then convert
-    //revolutions to units
+    //convert command to a percentage of maxRPM, 
+    //then convert revolutions to units
     //and minutes to 100ms
     return command * maxDriveRPM * 4096 / 600;
   }
