@@ -22,15 +22,10 @@ public final class Constants {
     public static int kTimeoutMs = 30;
 
     //Drive Characteristics
-    public static int maxDriveRPM = 500;
-    //note: KOP ToughBox Mini Gearing is 10.71:1
-
+    public static int maxDriveRPM = 495;
 
     //PID Gains
     public static Gains leftDriveGains  = new Gains(0.3053, 0, 0, 0);
     public static Gains rightDriveGains = new Gains(0.3053, 0, 0, 0);
-
-
-    //Sensor Ports
     
 }
