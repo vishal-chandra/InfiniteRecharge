@@ -44,7 +44,11 @@ public class Drive extends SubsystemBase {
      * LEFT DRIVE PID SETUP ------------------------------------------------------------------------
      */
     leftTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, kTimeoutMs);
-    leftTalon.setSensorPhase(true); //TEST
+    leftTalon.setSensorPhase(true);
+
+    leftTalon.setInverted(true); //make it spin the right way
+    leftVictor.setInverted(true); //make the follower spin the right way too
+
 
     //minimum percent output
     leftTalon.configNominalOutputForward(0, kTimeoutMs);
@@ -65,7 +69,7 @@ public class Drive extends SubsystemBase {
      * RIGHT DRIVE PID SETUP -----------------------------------------------------------------------
      */
     rightTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, kTimeoutMs);
-    rightTalon.setSensorPhase(false); //TEST
+    rightTalon.setSensorPhase(false); 
 
     //minimum percent output
     rightTalon.configNominalOutputForward(0, kTimeoutMs);
