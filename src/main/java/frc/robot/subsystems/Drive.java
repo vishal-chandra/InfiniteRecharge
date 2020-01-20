@@ -134,7 +134,9 @@ public class Drive extends SubsystemBase {
     rightTalon.set(ControlMode.Velocity, commandToTargetVelocity(rightCommand));
 
     //left logs
-    System.out.println("targ: " + leftTalon.getClosedLoopTarget() + "\terr: " + leftTalon.getClosedLoopError());
+    System.out.println("vel: "    + leftTalon.getSelectedSensorVelocity() + 
+                       "\ttarg: " + leftTalon.getClosedLoopTarget() + 
+                       "\terr: "  + leftTalon.getClosedLoopError());
   }
 
   /**
