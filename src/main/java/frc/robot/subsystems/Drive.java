@@ -47,7 +47,7 @@ public class Drive extends SubsystemBase {
     leftTalon.setSensorPhase(true);
 
     leftTalon.setInverted(true); //make it spin the right way
-    leftVictor.setInverted(true); //make the follower spin the right way too
+    leftVictor.setInverted(InvertType.FollowMaster); //make the follower spin the same way
 
 
     //minimum percent output
@@ -58,10 +58,14 @@ public class Drive extends SubsystemBase {
     leftTalon.configPeakOutputForward(1, kTimeoutMs);
     leftTalon.configPeakOutputReverse(-1, kTimeoutMs);
 
+    //gains
     leftTalon.config_kF(0, leftDriveGains.kF, kTimeoutMs);
     leftTalon.config_kP(0, leftDriveGains.kP, kTimeoutMs);
     leftTalon.config_kI(0, leftDriveGains.kI, kTimeoutMs);
     leftTalon.config_kD(0, leftDriveGains.kD, kTimeoutMs);
+
+    //ramp (this won't work because it ramps turns too)
+    //leftTalon.configClosedloopRamp(kRampDuration, kTimeoutMs);
 
     leftVictor.follow(leftTalon);
 
@@ -79,10 +83,14 @@ public class Drive extends SubsystemBase {
     rightTalon.configPeakOutputForward(1, kTimeoutMs);
     rightTalon.configPeakOutputReverse(-1, kTimeoutMs);
 
+    //gains
     rightTalon.config_kF(0, rightDriveGains.kF, kTimeoutMs);
     rightTalon.config_kP(0, rightDriveGains.kP, kTimeoutMs);
     rightTalon.config_kI(0, rightDriveGains.kI, kTimeoutMs);
     rightTalon.config_kD(0, rightDriveGains.kD, kTimeoutMs);
+
+    //ramp (this won't work because it ramps the turns too)
+    //rightTalon.configClosedloopRamp(kRampDuration, kTimeoutMs);
 
     rightVictor.follow(rightTalon);
   }
