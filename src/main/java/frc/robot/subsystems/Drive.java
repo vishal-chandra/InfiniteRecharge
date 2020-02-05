@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 //WPI
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 //CTRE
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -73,7 +74,7 @@ public class Drive extends SubsystemBase {
      * RIGHT DRIVE PID SETUP -----------------------------------------------------------------------
      */
     rightTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, kTimeoutMs);
-    rightTalon.setSensorPhase(false); 
+    rightTalon.setSensorPhase(true); 
 
     //minimum percent output
     rightTalon.configNominalOutputForward(0, kTimeoutMs);
@@ -177,6 +178,17 @@ public class Drive extends SubsystemBase {
     //then convert revolutions to units
     //and minutes to 100ms
     return command * maxDriveRPM * 4096 / 600;
+  }
+
+  public void updateShuffleboard() {
+    SmartDashboard.putNumber("leftDriveError", leftTalon.getClosedLoopError());
+    SmartDashboard.putNumber("rightDriveError", rightTalon.getClosedLoopError());
+
+    SmartDashboard.putNumber("leftVel", leftTalon.getSelectedSensorVelocity());
+    SmartDashboard.putNumber("rightVel", rightTalon.getSelectedSensorVelocity());
+
+    SmartDashboard.putNumber("leftTarget", leftTalon.getClosedLoopTarget());
+    SmartDashboard.putNumber("rightTarget", rightTalon.getClosedLoopTarget());
   }
 
 }

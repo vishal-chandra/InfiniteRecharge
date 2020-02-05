@@ -23,8 +23,7 @@ public class RobotContainer {
   XboxController xbox = new XboxController(kXboxPort);
 
   // The robot's subsystems and commands are defined here...
-  private final Drive drive = new Drive();
-
+  public final Drive drive = new Drive();
   private final Command m_autoCommand = new WaitCommand(0);
 
 

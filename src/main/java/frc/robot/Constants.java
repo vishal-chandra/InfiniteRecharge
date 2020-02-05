@@ -28,7 +28,7 @@ public final class Constants {
     public static double kRampDuration = 1.5;
 
     //PID Gains (to be tuned)
+    //gearing on new robot is 8.46:1
     public static Gains leftDriveGains  = new Gains(0.3053, 0.3, 0, 0); 
-    public static Gains rightDriveGains = new Gains(0.3053, 0.075, 0, 0);
-    
+    public static Gains rightDriveGains = new Gains(0.3053, 0.3, 0, 0);
 }

@@ -9,7 +9,40 @@
         "showGrid": true,
         "hgap": 16.0,
         "vgap": 16.0,
-        "tiles": {}
+        "tiles": {
+          "4,0": {
+            "size": [
+              3,
+              3
+            ],
+            "content": {
+              "_type": "Graph",
+              "_source0": "network_table:///driveMonitor/rightErr",
+              "_title": "driveMonitor/rightErr",
+              "Graph/Visible time": 30.0,
+              "Y-axis/Automatic bounds": true,
+              "Y-axis/Upper bound": 1.0,
+              "Y-axis/Lower bound": -1.0,
+              "Visible data/driveMonitor/rightErr": true
+            }
+          },
+          "1,0": {
+            "size": [
+              3,
+              3
+            ],
+            "content": {
+              "_type": "Graph",
+              "_source0": "network_table:///driveMonitor/leftErr",
+              "_title": "driveMonitor/leftErr",
+              "Graph/Visible time": 30.0,
+              "Y-axis/Automatic bounds": true,
+              "Y-axis/Upper bound": 1.0,
+              "Y-axis/Lower bound": -1.0,
+              "Visible data/driveMonitor/leftErr": true
+            }
+          }
+        }
       }
     },
     {
