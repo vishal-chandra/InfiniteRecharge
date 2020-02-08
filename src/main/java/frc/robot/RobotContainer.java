@@ -24,6 +24,8 @@ public class RobotContainer {
 
   // The robot's subsystems and commands are defined here...
   public final Drive drive = new Drive();
+  public final Vision vision = new Vision();
+
   private final Command m_autoCommand = new WaitCommand(0);
 
 
@@ -43,6 +45,11 @@ public class RobotContainer {
           -xbox.getX(Hand.kRight) //for some reason this needs to be reversed
       ),
       drive)
+    );
+
+    vision.setDefaultCommand(
+      new RunCommand(
+        () -> vision.getValues(), vision)
     );
 
   }
