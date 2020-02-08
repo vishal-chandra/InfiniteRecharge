@@ -31,7 +31,7 @@ public class Vision extends SubsystemBase {
     double area = ta.getDouble(0.0);
 
     //distance to target
-    double dy = (6.9375 - 0.5) / Math.tan(y); //height of target (6.9375) - height of limelight / tan(angle)
+    double dy = (8.0833 - 1.9167) / Math.tan(y); //height of target (needs to be adjusted) - height of limelight / tan(angle)
 
     //post to smart dashboard periodically
     SmartDashboard.putNumber("LimelightX", x);

@@ -49,7 +49,6 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().run();
 
     m_robotContainer.drive.updateShuffleboard();
-    m_robotContainer.vision.getValues();
   }
 
   /**
