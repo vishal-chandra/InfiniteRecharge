@@ -14,6 +14,8 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.util.Color;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 //CTRE
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
@@ -27,23 +29,33 @@ import static frc.robot.Constants.*;
 
 public class ColorWheel extends SubsystemBase {
   
-  TalonSRX colorWheelTalon;
-  DigitalInput colorSwitch;
+  TalonSRX colorWheelTalon; //motor
 
-  ColorSensorV3 colorSensor;
+  //this switch is responsible for telling us if we're @ the wheel
+  DigitalInput positionSwitch;
+
+  ColorSensorV3 colorSensor; //reads color
   ColorMatch colorMatcher;
   ColorMatchResult matchResult;
+
+  //stores the color displayed by the DriverStation
+  public char sensorColorCommand = ' ';
   
+  //colors on the wheel
   Color redTarget = ColorMatch.makeColor(0, 0, 0);
   Color blueTarget = ColorMatch.makeColor(0, 0, 0);
   Color greenTarget = ColorMatch.makeColor(0, 0, 0);
   Color yellowTarget = ColorMatch.makeColor(0, 0, 0);
 
   public ColorWheel() {
-
     //init hardware
     colorWheelTalon = new TalonSRX(kColorWheelTalonID);
-    colorSwitch = new DigitalInput(kColorWheelSwitchPort);
+    colorWheelTalon.configFactoryDefault();
+    colorWheelTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+    colorWheelTalon.setSensorPhase(false);
+
+    positionSwitch = new DigitalInput(kColorWheelSwitchPort);
+
     colorSensor = new ColorSensorV3(Port.kOnboard);
 
     //init matching
@@ -54,39 +66,49 @@ public class ColorWheel extends SubsystemBase {
     colorMatcher.addColorMatch(yellowTarget);
   }
 
-  public void colorControl() {
-
-  }
-
-  public void rotationControl() {
-
-  }
-
   /**
    * gets the color command from the Dashboard
    * see https://docs.wpilib.org/en/latest/docs/software/wpilib-overview/2020-Game-Data.html
    */
-  private char getColorCommand() {
+  public void getColorCommand() {
     String fieldColor = DriverStation.getInstance().getGameSpecificMessage();
-    char sensorColor = ' ';
 
     if(fieldColor.length() > 0) {
       switch(fieldColor.charAt(0)) {
         case 'R':
-          sensorColor = 'B';
+          sensorColorCommand = 'B';
           break;
         case 'G':
-          sensorColor = 'Y';
+          sensorColorCommand = 'Y';
           break;
         case 'B':
-          sensorColor = 'R';
+          sensorColorCommand = 'R';
           break;
         case 'Y':
-          sensorColor = 'G';
+          sensorColorCommand = 'G';
           break;
-        
       }
     }
-    return sensorColor;
+  }
+
+  public char readColor() {
+    ColorMatchResult match = colorMatcher.matchClosestColor(colorSensor.getColor());
+    if(match.color == redTarget) return 'R';
+    else if(match.color == blueTarget) return 'B';
+    else if(match.color == greenTarget) return 'G';
+    else if(match.color == yellowTarget) return 'Y';
+    else return ' ';
+  }
+
+  public void startMotor() {
+    if(positionSwitch.get()) colorWheelTalon.set(ControlMode.PercentOutput, 0.2);
+  }
+
+  public void stopMotor() {
+    colorWheelTalon.set(ControlMode.PercentOutput, 0);
+  }
+
+  public boolean getSwitch() {
+    return positionSwitch.get();
   }
 }
