@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 //WPI
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.SlewRateLimiter;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 //CTRE
@@ -17,6 +18,7 @@ public class Drive extends SubsystemBase {
   
   TalonSRX leftTalon, rightTalon;
   VictorSPX leftVictor, rightVictor;
+  SlewRateLimiter throttleRamp;
 
   /**
    * Constructor
@@ -65,9 +67,6 @@ public class Drive extends SubsystemBase {
     leftTalon.config_kI(0, leftDriveGains.kI, kTimeoutMs);
     leftTalon.config_kD(0, leftDriveGains.kD, kTimeoutMs);
 
-    //ramp (this won't work because it ramps turns too)
-    //leftTalon.configClosedloopRamp(kRampDuration, kTimeoutMs);
-
     leftVictor.follow(leftTalon);
 
     /**
@@ -90,10 +89,10 @@ public class Drive extends SubsystemBase {
     rightTalon.config_kI(0, rightDriveGains.kI, kTimeoutMs);
     rightTalon.config_kD(0, rightDriveGains.kD, kTimeoutMs);
 
-    //ramp (this won't work because it ramps the turns too)
-    //rightTalon.configClosedloopRamp(kRampDuration, kTimeoutMs);
-
     rightVictor.follow(rightTalon);
+    
+    //Ramp init-------------------------------
+    throttleRamp = new SlewRateLimiter(kThrottleSlewRate);
   }
 
   /**
@@ -106,8 +105,9 @@ public class Drive extends SubsystemBase {
    */
   public void curvatureDrive(double power, double turn) {
 
-    //adjust joystick inputs
-    double curvedPower = curve(power);
+    //curve the power and limit it's rate of change
+    double curvedPower = throttleRamp.calculate(curve(power));
+    //curve the turning, but don't ramp it
     double curvedTurn  = curve(turn);
 
     //a positive turn command should speed up the left side
@@ -146,10 +146,6 @@ public class Drive extends SubsystemBase {
     leftTalon.set(ControlMode.Velocity, commandToTargetVelocity(leftCommand));
     rightTalon.set(ControlMode.Velocity, commandToTargetVelocity(rightCommand));
 
-    //left logs
-    System.out.println("vel: "    + leftTalon.getSelectedSensorVelocity() + 
-                       "\ttarg: " + leftTalon.getClosedLoopTarget() + 
-                       "\terr: "  + leftTalon.getClosedLoopError());
   }
 
   /**

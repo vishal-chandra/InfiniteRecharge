@@ -39,7 +39,7 @@ public class RobotContainer {
     drive.setDefaultCommand(
       new RunCommand(
       () -> drive.curvatureDrive(
-          xbox.getY(Hand.kLeft), 
+          xbox.getY(Hand.kLeft),
           -xbox.getX(Hand.kRight) //for some reason this needs to be reversed
       ),
       drive)
