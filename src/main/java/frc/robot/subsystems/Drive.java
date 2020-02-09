@@ -91,7 +91,7 @@ public class Drive extends SubsystemBase {
 
     rightVictor.follow(rightTalon);
     
-    //Ramp init-------------------------------
+    //Ramp init 
     throttleRamp = new SlewRateLimiter(kThrottleSlewRate);
   }
 
@@ -105,20 +105,16 @@ public class Drive extends SubsystemBase {
    */
   public void curvatureDrive(double power, double turn) {
 
-    //curve the power and limit it's rate of change
+    //adjust inputs
     double curvedPower = throttleRamp.calculate(curve(power));
-    //curve the turning, but don't ramp it
     double curvedTurn  = curve(turn);
 
     //a positive turn command should speed up the left side
-    //and a negative turn command should slow down the left side
     double leftCommand  = curvedPower + curvedTurn;
-
-    //a positive turn command should slow down the right side
-    //and a negative turn command should speed up the right side
+    //a negative turn command should speed up the right side
     double rightCommand = curvedPower - curvedTurn;
 
-    //if a command is outside the domain [-1.0, 1]
+    //if a command is outside the domain [-1.0, 1.0]
     //bring that command down/up to +-1.0 and bring
     //the other command down/up by the same amount
     if(leftCommand > 1.0) {
@@ -145,7 +141,6 @@ public class Drive extends SubsystemBase {
     //send commands
     leftTalon.set(ControlMode.Velocity, commandToTargetVelocity(leftCommand));
     rightTalon.set(ControlMode.Velocity, commandToTargetVelocity(rightCommand));
-
   }
 
   /**
