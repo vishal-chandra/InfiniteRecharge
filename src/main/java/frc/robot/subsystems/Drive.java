@@ -18,7 +18,7 @@ public class Drive extends SubsystemBase {
   
   TalonSRX leftTalon, rightTalon;
   VictorSPX leftVictor, rightVictor;
-  SlewRateLimiter throttleRamp;
+  SlewRateLimiter throttleRamp, turnRamp;
 
   /**
    * Constructor
@@ -93,6 +93,7 @@ public class Drive extends SubsystemBase {
     
     //Ramp init 
     throttleRamp = new SlewRateLimiter(kThrottleSlewRate);
+    turnRamp = new SlewRateLimiter(kTurnSlewRate);
   }
 
   /**
@@ -107,7 +108,7 @@ public class Drive extends SubsystemBase {
 
     //adjust inputs
     double curvedPower = throttleRamp.calculate(curve(power));
-    double curvedTurn  = curve(turn);
+    double curvedTurn  = turnRamp.calculate(curve(turn));
 
     //a positive turn command should speed up the left side
     double leftCommand  = curvedPower + curvedTurn;

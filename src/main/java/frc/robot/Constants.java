@@ -26,7 +26,8 @@ public final class Constants {
     //Drive Characteristics
     public static int maxDriveRPM = 495;
     //max throttle change in a second
-    public static double kThrottleSlewRate = 0.25; 
+    public static double kThrottleSlewRate = 0.8; 
+    public static double kTurnSlewRate = 0.9;
 
     //PID Gains (to be tuned)
     //gearing on new robot is 8.46:1
