@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Vision extends SubsystemBase {
   
-  NetworkTableEntry tx, ty, ta;
+  NetworkTableEntry tx, ty, ta, tv;
   
   /**
    * Creates a new Vision.
@@ -26,41 +26,52 @@ public class Vision extends SubsystemBase {
    */
   public void getValues() {
     //read values periodically
-    double x = tx.getDouble(0.0);
-    double y = ty.getDouble(0.0);
+    double xAngle = tx.getDouble(0.0);
+    double yAngle = ty.getDouble(0.0);
     double area = ta.getDouble(0.0);
 
     //distance to target
-    double dy = (8.0833 - 1.9167) / Math.tan(y); //height of target (needs to be adjusted) - height of limelight / tan(angle)
+    double targetHeight = 8.0833;
+    double cameraHeight = 1.9167;
+    double yDistance = (targetHeight - cameraHeight) / Math.tan(yAngle * Math.PI / 180); //height of target (needs to be adjusted) - height of limelight / tan(angle)
 
     //post to smart dashboard periodically
-    SmartDashboard.putNumber("LimelightX", x);
-    SmartDashboard.putNumber("LimelightY", y);
-    SmartDashboard.putNumber("LimelightDy", dy);
+    SmartDashboard.putNumber("LimelightX", xAngle);
+    SmartDashboard.putNumber("LimelightY", yAngle);
+    SmartDashboard.putNumber("LimelightDy", yDistance);
     SmartDashboard.putNumber("LimelightArea", area);
   }
 
   /**
-   * Generates driving and steering commands based on tracking data from limelight.
+   * Generates driving and steering commands based on tracking data from
+   * limelight.
+   * 
    * @return steering adjustment value (+ right command, - left command)
    */
   public double makeAdjustment() {
-    //NEED TO TEST ROBOT TO FIGURE THIS VALUE OUT:
-    double Kp = -0.1; //proportional control constant 
-    double min_command = 0.05; // minimum amount of power needed to actually make a movement
+    // NEED TO TEST ROBOT TO FIGURE THIS VALUE OUT:
+    final double Kp = -0.1; // proportional control constant
+    final double minCommand = 0.05; // minimum amount of power needed to actually make a movement
 
-    double x = tx.getDouble(0.0); //angle of adjustment
+    final double x = tx.getDouble(0.0); // angle of adjustment
 
-    double heading_error = -x;
-    double steering_adjust = 0.0;
+    final double headingError = -x;
+    double steeringAdjust = 0.0;
 
-    //if angle of adjustment is less than 1.0, the robot needs to move at least min_command
+    double validTarget = tv.getDouble(0.0); 
+
+    // if angle of adjustment is less than 1.0, the robot needs to move at least
+    // min_command
     if (x > 1.0)
-      steering_adjust = Kp * heading_error - min_command;
-    else if (x < 1.0)
-      steering_adjust = Kp * heading_error + min_command;
+      steeringAdjust = Kp * headingError - minCommand;
+    else
+      steeringAdjust = Kp * headingError + minCommand;
+    
+    if (validTarget < 1.0)
+      steeringAdjust = 0.0;
 
-    return steering_adjust;
+    return steeringAdjust;
+
   }
 
   @Override
