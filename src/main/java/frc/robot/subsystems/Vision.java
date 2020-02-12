@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Vision extends SubsystemBase {
   
   NetworkTableEntry tx, ty, ta;
+
+  ArrayList <DataPoint> dataPoint = new ArrayList<DataPoint>();
   
   /**
    * Creates a new Vision.
@@ -19,6 +21,7 @@ public class Vision extends SubsystemBase {
     tx = table.getEntry("tx");
     ty = table.getEntry("ty");
     ta = table.getEntry("ta");
+    tv = table.getEntry("tv");
   }
 
   /**
@@ -26,18 +29,37 @@ public class Vision extends SubsystemBase {
    */
   public void getValues() {
     //read values periodically
-    double x = tx.getDouble(0.0);
-    double y = ty.getDouble(0.0);
+    double xAngle = tx.getDouble(0.0);
+    double yAngle = ty.getDouble(0.0);
     double area = ta.getDouble(0.0);
 
     //distance to target
-    double dy = (8.0833 - 1.9167) / Math.tan(y); //height of target (needs to be adjusted) - height of limelight / tan(angle)
+    double TargetHeight = 8.0833;
+    double camerHeight = 1.9167;
+    double yDistance = (targetHeight - cameraHeight) / Math.tan(yAngle * Math.PI / 180); //height of target (needs to be adjusted) - height of limelight / tan(angle)
 
-    //post to smart dashboard periodically
-    SmartDashboard.putNumber("LimelightX", x);
-    SmartDashboard.putNumber("LimelightY", y);
-    SmartDashboard.putNumber("LimelightDy", dy);
-    SmartDashboard.putNumber("LimelightArea", area);
+    //averages data points, stores in arraylist, displays a value every 10 data points
+    if (dataPoint.size < 10)
+      dataPoint.add(new DataPoint(xAngle, yAngle, area, yDistance));
+    else {
+      double xAngleSum = 0;
+      double yAngleSum = 0;
+      double areaSum = 0;
+      double yDistanceSum = 0;
+
+      for (int i = 0; i < 10; i++) {
+        xAngleSum += dataPoint.get(i).xAngle;
+        yAngleSum += dataPoint.get(i).yAngle;
+        areaSum += dataPoint.get(i).area;
+        yDistanceSum += dataPoint.get(i).yDistance;
+      }
+
+      DataPoint averageDataPoint = new DataPoint(xAngleSum / 10, yAngleSum / 10, areaSum / 10, yDistanceSum / 10);
+      averageDataPoint.displayDataPoint();
+
+      for (int i = 0; i < 10; i++)
+        dataPoints.remove(0);
+    }
   }
 
   /**
@@ -54,11 +76,21 @@ public class Vision extends SubsystemBase {
     double heading_error = -x;
     double steering_adjust = 0.0;
 
+    boolean validTarget;
+    
+    if (tv.getDouble(0.0) < 1)
+      validTarget = false;
+    else
+      validTarget = true;
+
     //if angle of adjustment is less than 1.0, the robot needs to move at least min_command
     if (x > 1.0)
       steering_adjust = Kp * heading_error - min_command;
-    else if (x < 1.0)
+    else 
       steering_adjust = Kp * heading_error + min_command;
+
+    if (!validTarget)
+      steering_adjust = 0;
 
     return steering_adjust;
   }
