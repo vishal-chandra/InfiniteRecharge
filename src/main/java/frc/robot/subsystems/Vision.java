@@ -1,6 +1,9 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import java.util.ArrayList;
+
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -9,7 +12,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Vision extends SubsystemBase {
   
-  NetworkTableEntry tx, ty, ta;
+  NetworkTableEntry tx, ty, ta, tv;
 
   ArrayList <DataPoint> dataPoint = new ArrayList<DataPoint>();
   
@@ -34,12 +37,12 @@ public class Vision extends SubsystemBase {
     double area = ta.getDouble(0.0);
 
     //distance to target
-    double TargetHeight = 8.0833;
-    double camerHeight = 1.9167;
+    double targetHeight = 8.0833;
+    double cameraHeight = 1.9167;
     double yDistance = (targetHeight - cameraHeight) / Math.tan(yAngle * Math.PI / 180); //height of target (needs to be adjusted) - height of limelight / tan(angle)
 
     //averages data points, stores in arraylist, displays a value every 10 data points
-    if (dataPoint.size < 10)
+    if (dataPoint.size() < 10)
       dataPoint.add(new DataPoint(xAngle, yAngle, area, yDistance));
     else {
       double xAngleSum = 0;
@@ -58,7 +61,7 @@ public class Vision extends SubsystemBase {
       averageDataPoint.displayDataPoint();
 
       for (int i = 0; i < 10; i++)
-        dataPoints.remove(0);
+        dataPoint.remove(0);
     }
   }
 
