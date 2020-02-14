@@ -42,10 +42,10 @@ public class ColorWheel extends SubsystemBase {
   public char sensorColorCommand = ' ';
   
   //colors on the wheel
-  Color redTarget = ColorMatch.makeColor(0, 0, 0);
-  Color blueTarget = ColorMatch.makeColor(0, 0, 0);
-  Color greenTarget = ColorMatch.makeColor(0, 0, 0);
-  Color yellowTarget = ColorMatch.makeColor(0, 0, 0);
+  Color redTarget = ColorMatch.makeColor(0.53, 0.34, 0.13);
+  Color blueTarget = ColorMatch.makeColor(0.12, 0.43, 0.45);
+  Color greenTarget = ColorMatch.makeColor(0.17, 0.58, 0.25);
+  Color yellowTarget = ColorMatch.makeColor(0.31, 0.57, 0.12);
 
   public ColorWheel() {
     //init hardware
