@@ -24,8 +24,10 @@ public class ColorControl extends CommandBase {
 
   @Override
   public void initialize() {
-    colorWheel.getColorCommand(); //read from the DS
-    colorWheel.startMotor(); //begin spinning the wheel
+    //don't need this since I'll manually feed it in
+    //colorWheel.getColorCommand(); //read from the DS
+
+    System.out.println("start motor now");
   }
 
   @Override
@@ -33,18 +35,18 @@ public class ColorControl extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
-    colorWheel.stopMotor();
+    System.out.println("stop motor");
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
 
-    if(!colorWheel.getSwitch()) { //end if we're not touching the wheel
-      return true;
-    }
+    // if(!colorWheel.getSwitch()) { //end if we're not touching the wheel
+    //   return true;
+    // }
     //end as soon as we've reached the right color
-    else if(colorWheel.readColor() == colorWheel.sensorColorCommand) {
+    if(colorWheel.readColor() == colorWheel.sensorColorCommand) {
       return true;
     }
     else return false;

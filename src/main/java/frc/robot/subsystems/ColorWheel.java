@@ -39,7 +39,7 @@ public class ColorWheel extends SubsystemBase {
   ColorMatchResult matchResult;
 
   //stores the color displayed by the DriverStation
-  public char sensorColorCommand = ' ';
+  public char sensorColorCommand = 'R';
   
   //colors on the wheel
   Color redTarget = ColorMatch.makeColor(0.53, 0.34, 0.13);

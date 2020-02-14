@@ -27,8 +27,7 @@ public class RotationControl extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    initColor = colorWheel.readColor();
-    colorWheel.startMotor(); 
+    System.out.println("start motor");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -41,7 +40,7 @@ public class RotationControl extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    colorWheel.stopMotor();
+    System.out.println("stop motor");
   }
 
   // Returns true when the command should end.
