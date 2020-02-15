@@ -13,8 +13,9 @@ import frc.robot.subsystems.*;
 public class RotationControl extends CommandBase {
 
   ColorWheel colorWheel;
-  char initColor;
+  char initColor, lastColor, currentColor;
   int colorPasses = 0;
+  boolean hasMoved = false;
 
   /**
    * Add Requirements
@@ -27,27 +28,39 @@ public class RotationControl extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    System.out.println("start motor");
+    initColor = colorWheel.readColor();
+    System.out.println("start motor (rotation)");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    char currentColor = colorWheel.readColor();
-    if(currentColor == initColor) colorPasses++;
+    currentColor = colorWheel.readColor();
+
+    if(currentColor != lastColor) hasMoved = true;
+
+    if(currentColor == initColor && hasMoved) {
+      colorPasses++;
+      System.out.println(colorPasses);
+      hasMoved = false;
+    }
+
+    lastColor = currentColor;
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    System.out.println("stop motor");
+    System.out.println("stop motor (rotation)");
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(colorPasses == 6)
+    if(colorPasses == 6) {
+      colorPasses = 0;
       return true;
+    }
     else
       return false;
   }

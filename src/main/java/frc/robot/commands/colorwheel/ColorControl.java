@@ -24,10 +24,8 @@ public class ColorControl extends CommandBase {
 
   @Override
   public void initialize() {
-    //don't need this since I'll manually feed it in
-    //colorWheel.getColorCommand(); //read from the DS
-
-    System.out.println("start motor now");
+    colorWheel.getColorCommand();
+    System.out.println("start motor (color)");
   }
 
   @Override
@@ -35,7 +33,7 @@ public class ColorControl extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
-    System.out.println("stop motor");
+    System.out.println("stop motor (color)");
   }
 
   // Returns true when the command should end.
@@ -49,7 +47,7 @@ public class ColorControl extends CommandBase {
     if(colorWheel.readColor() == colorWheel.sensorColorCommand) {
       return true;
     }
-    else return false;
+    else return false;  
 
   }
 }

@@ -39,7 +39,7 @@ public class ColorWheel extends SubsystemBase {
   ColorMatchResult matchResult;
 
   //stores the color displayed by the DriverStation
-  public char sensorColorCommand = 'R';
+  public char sensorColorCommand = ' ';
   
   //colors on the wheel
   Color redTarget = ColorMatch.makeColor(0.53, 0.34, 0.13);
@@ -71,7 +71,7 @@ public class ColorWheel extends SubsystemBase {
    * see https://docs.wpilib.org/en/latest/docs/software/wpilib-overview/2020-Game-Data.html
    */
   public void getColorCommand() {
-    String fieldColor = DriverStation.getInstance().getGameSpecificMessage();
+    String fieldColor = "R"; //DriverStation.getInstance().getGameSpecificMessage();
 
     if(fieldColor.length() > 0) {
       switch(fieldColor.charAt(0)) {
