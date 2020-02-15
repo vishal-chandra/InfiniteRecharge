@@ -21,13 +21,14 @@ import static frc.robot.Constants.*;
 public class RobotContainer {
 
   XboxController xbox = new XboxController(kXboxPort);
+  JoystickButton visionAimButton = new JoystickButton(xbox, XboxController.Button.kX.value);
 
   // The robot's subsystems and commands are defined here...
   public final Drive drive = new Drive();
   private final Vision vision = new Vision();
+  private final VisionAim visionAim = new VisionAim();
 
   private final Command m_autoCommand = new WaitCommand(0);
-
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -47,11 +48,23 @@ public class RobotContainer {
       drive)
     );
 
+    //constantly posts limelight reading values on NetworkTables
     vision.setDefaultCommand(
       new RunCommand(
         () -> vision.getValues(), vision)
     );
 
+  }
+
+  /**
+   * Constantly checks if vision aim is on
+   * Only passes stick values if vision aim is off
+   */
+  public void checkVisionAim() {
+    if (!visionAim.isVisionAimOn)
+      drive.curvatureDrive(
+        xbox.getY(Hand.kLeft), 
+        -xbox.getX(Hand.kRight));
   }
 
   /**
@@ -61,8 +74,8 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    visionAimButton.whenActive(visionAim); //vision aim on when button X is pressed
   }
-
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
