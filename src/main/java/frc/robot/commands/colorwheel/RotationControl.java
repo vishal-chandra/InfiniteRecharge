@@ -29,6 +29,7 @@ public class RotationControl extends CommandBase {
   @Override
   public void initialize() {
     initColor = colorWheel.readColor();
+    lastColor = initColor;
     System.out.println("start motor (rotation)");
   }
 
@@ -47,7 +48,7 @@ public class RotationControl extends CommandBase {
 
     lastColor = currentColor;
   }
-
+ 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
@@ -58,7 +59,7 @@ public class RotationControl extends CommandBase {
   @Override
   public boolean isFinished() {
     if(colorPasses == 6) {
-      colorPasses = 0;
+      colorPasses = 0; //reset to original state
       return true;
     }
     else
