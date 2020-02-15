@@ -25,7 +25,7 @@ public class ColorControl extends CommandBase {
   @Override
   public void initialize() {
     colorWheel.getColorCommand();
-    System.out.println("start motor (color)");
+    colorWheel.startMotor();
   }
 
   @Override
@@ -33,13 +33,14 @@ public class ColorControl extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
-    System.out.println("stop motor (color)");
+    colorWheel.stopMotor();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
 
+    //commented out because we don't have a switch
     // if(!colorWheel.getSwitch()) { //end if we're not touching the wheel
     //   return true;
     // }
