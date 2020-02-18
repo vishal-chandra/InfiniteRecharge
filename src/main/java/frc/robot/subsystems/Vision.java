@@ -1,7 +1,5 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import java.util.ArrayList;
 
 import edu.wpi.first.networktables.NetworkTable;
@@ -60,11 +58,9 @@ public class Vision extends SubsystemBase {
       DataPoint averageDataPoint = new DataPoint(xAngleSum / 10, yAngleSum / 10, areaSum / 10, yDistanceSum / 10);
       averageDataPoint.displayDataPoint();
 
-    //post to smart dashboard periodically
-    SmartDashboard.putNumber("LimelightX", xAngle);
-    SmartDashboard.putNumber("LimelightY", yAngle);
-    SmartDashboard.putNumber("LimelightDy", yDistance);
-    SmartDashboard.putNumber("LimelightArea", area);
+      for (int i = 0; i < 10; i++)
+        dataPoint.remove(0);
+    }
   }
 
   /**

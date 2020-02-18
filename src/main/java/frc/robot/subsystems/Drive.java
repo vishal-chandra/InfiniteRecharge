@@ -105,7 +105,6 @@ public class Drive extends SubsystemBase {
    * @param turn  desired curvature as a number [-1.0, 1.0]
    */
   public void curvatureDrive(double power, double turn) {
-
     //adjust joystick inputs
     double curvedPower = curve(power);
     double curvedTurn  = curve(turn);
@@ -151,7 +150,7 @@ public class Drive extends SubsystemBase {
                        "\ttarg: " + leftTalon.getClosedLoopTarget() + 
                        "\terr: "  + leftTalon.getClosedLoopError());
   }
-
+  
   /**
    * f(x) = x|x|
    * curves input so that sensitivity increases 
