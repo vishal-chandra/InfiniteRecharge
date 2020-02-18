@@ -19,6 +19,7 @@ public class Shooter extends SubsystemBase {
   
   TalonSRX shooterTalon;
   double shootRPM = commandToTargetVelocity(0.8);
+  int shooterTolerance = 300; //this is in ticks per 100ms
 
   public Shooter() {
     shooterTalon = new TalonSRX(kShooterTalonID);
@@ -50,7 +51,7 @@ public class Shooter extends SubsystemBase {
   }
 
   public boolean checkRPM() {
-    if(Math.abs(shooterTalon.getSelectedSensorVelocity() - shootRPM) < 300)
+    if(Math.abs(shooterTalon.getSelectedSensorVelocity() - shootRPM) < shooterTolerance)
       return true;
     else return false;
   }
