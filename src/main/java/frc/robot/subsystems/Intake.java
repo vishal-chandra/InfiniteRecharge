@@ -36,6 +36,7 @@ public class Intake extends SubsystemBase {
 
   }
 
+  /*Motor Methods*/
   public void runIntake() {
     intakeMotor.set(ControlMode.PercentOutput, 0.3);
   }
@@ -50,6 +51,19 @@ public class Intake extends SubsystemBase {
 
   public void stopTower() {
     towerMotor.set(ControlMode.PercentOutput, 0.3);
+  }
+
+  /*Switch Methods*/
+  public boolean ballInRobot() {
+    return intakeSwitch.get();
+  }
+
+  public boolean ballAtTowerBottom() {
+    return towerBottomSwitch.get();
+  }
+
+  public boolean ballAtTowerTop() {
+    return towerTopSwitch.get();
   }
 
 }
