@@ -30,6 +30,6 @@ public class IntakeBall extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return intake.ballInRobot();
+    return intake.ballInIntake();
   }
 }
