@@ -20,7 +20,7 @@ public class Intake extends SubsystemBase {
   DigitalInput intakeSwitch, towerBottomSwitch, towerTopSwitch;
   TalonSRX intakeMotor, towerMotor;
 
-  char intakeState = '';
+  char towerState = ' ';
 
   public Intake() {
 
@@ -36,17 +36,6 @@ public class Intake extends SubsystemBase {
     towerBottomSwitch = new DigitalInput(kTowerBottomSwitchPort);
     towerTopSwitch = new DigitalInput(kTowerTopSwitchPort);
 
-  }
-
-  public char getIntakeState() {
-    
-    //case 1: empty (can't shoot, can intake freely)
-
-    //case 2: balls at top but not full (can shoot freely, must bring down to shoot)
-
-    //case 3: balls at bottom but not full (must bring up to shoot, can intake freely)
-
-    //case 4: full (can shoot freely, can't intake)
   }
 
   /*Motor Methods*/
@@ -77,6 +66,38 @@ public class Intake extends SubsystemBase {
 
   public boolean ballAtTowerTop() {
     return towerTopSwitch.get();
+  }
+
+  public char getTowerState() {
+    
+    //case 1: empty (can't shoot, can intake freely)
+    if(!ballAtTowerBottom() && !ballAtTowerTop()) {
+      towerState = 'E';
+      return towerState;
+    }
+
+    //case 2: balls at top but not full (can shoot freely, must bring down to shoot)
+    else if(ballAtTowerTop() && !ballAtTowerBottom()) {
+      towerState = 'T';
+      return towerState;
+    }
+
+    //case 3: balls at bottom but not full (must bring up to shoot, can intake freely)
+    else if(ballAtTowerBottom() && !ballAtTowerTop()) {
+      towerState = 'B';
+      return towerState;
+    }
+
+    //case 4: full (can shoot freely, can't intake)
+    else if(ballAtTowerBottom() && ballAtTowerTop() && ballInIntake()) {
+      towerState = 'F';
+      return towerState;
+    }
+
+    else {
+      towerState = 'U';
+      return towerState;
+    }
   }
 
 }
