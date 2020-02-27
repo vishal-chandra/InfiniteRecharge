@@ -17,7 +17,9 @@ import static frc.robot.Constants.*;
 public class Drive extends SubsystemBase {
   
   TalonSRX leftTalon, rightTalon;
-  VictorSPX leftVictor, rightVictor;
+  TalonSRX rightFollower;
+  VictorSPX leftFollower;
+
   SlewRateLimiter throttleRamp, turnRamp;
 
   /**
@@ -34,14 +36,14 @@ public class Drive extends SubsystemBase {
     leftTalon = new TalonSRX(kLeftTalonID);
     leftTalon.configFactoryDefault();
 
-    leftVictor = new VictorSPX(kLeftVictorID);
-    leftVictor.configFactoryDefault();
+    leftFollower = new VictorSPX(kLeftFollowerID);
+    leftFollower.configFactoryDefault();
 
     rightTalon = new TalonSRX(kRightTalonID);
     rightTalon.configFactoryDefault();
 
-    rightVictor = new VictorSPX(kRightVictorID);
-    rightVictor.configFactoryDefault();
+    rightFollower = new TalonSRX(kRightFollowerID);
+    rightFollower.configFactoryDefault();
 
     /**
      * LEFT DRIVE PID SETUP ------------------------------------------------------------------------
@@ -50,7 +52,7 @@ public class Drive extends SubsystemBase {
     leftTalon.setSensorPhase(true);
 
     leftTalon.setInverted(true); //make it spin the right way
-    leftVictor.setInverted(InvertType.FollowMaster); //make the follower spin the same way
+    leftFollower.setInverted(InvertType.FollowMaster); //make the follower spin the same way
 
 
     //minimum percent output
@@ -67,7 +69,7 @@ public class Drive extends SubsystemBase {
     leftTalon.config_kI(0, leftDriveGains.kI, kTimeoutMs);
     leftTalon.config_kD(0, leftDriveGains.kD, kTimeoutMs);
 
-    leftVictor.follow(leftTalon);
+    leftFollower.follow(leftTalon);
 
     /**
      * RIGHT DRIVE PID SETUP -----------------------------------------------------------------------
@@ -89,7 +91,7 @@ public class Drive extends SubsystemBase {
     rightTalon.config_kI(0, rightDriveGains.kI, kTimeoutMs);
     rightTalon.config_kD(0, rightDriveGains.kD, kTimeoutMs);
 
-    rightVictor.follow(rightTalon);
+    rightFollower.follow(rightTalon);
     
     //Ramp init 
     throttleRamp = new SlewRateLimiter(kThrottleSlewRate);
