@@ -23,7 +23,7 @@ public final class Constants {
     //window to check for the completion of ctre methods
     public static int kTimeoutMs = 30;
 
-    //Drive Characteristics
+    //Drive Characteristics 
     public static int maxDriveRPM = 495;
     //max throttle change in a second
     public static double kThrottleSlewRate = 1.1;
@@ -31,6 +31,6 @@ public final class Constants {
 
     //PID Gains (to be tuned)
     //gearing on new robot is 8.46:1
-    public static Gains leftDriveGains  = new Gains(0.0281, 0, 0, 0); 
-    public static Gains rightDriveGains = new Gains(0.0281, 0, 0, 0);
+    public static Gains leftDriveGains  = new Gains(0.2643, 0, 0, 0); 
+    public static Gains rightDriveGains = new Gains(0.2643, 0, 0, 0);
 }
