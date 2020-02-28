@@ -31,6 +31,6 @@ public final class Constants {
 
     //PID Gains (to be tuned)
     //gearing on new robot is 8.46:1
-    public static Gains leftDriveGains  = new Gains(0.281, 0, 0, 0); 
-    public static Gains rightDriveGains = new Gains(0.281, 0, 0, 0);
+    public static Gains leftDriveGains  = new Gains(0.0281, 0, 0, 0); 
+    public static Gains rightDriveGains = new Gains(0.0281, 0, 0, 0);
 }
