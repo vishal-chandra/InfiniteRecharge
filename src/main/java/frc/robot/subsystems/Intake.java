@@ -40,7 +40,7 @@ public class Intake extends SubsystemBase {
 
   /*Motor Methods*/
   public void runIntake() {
-    intakeMotor.set(ControlMode.PercentOutput, 0.3);
+    intakeMotor.set(ControlMode.PercentOutput, -1.0);
   }
 
   public void stopIntake() {
@@ -48,15 +48,15 @@ public class Intake extends SubsystemBase {
   }
 
   public void runTower() {
-    towerMotor.set(ControlMode.PercentOutput, 0.0);
+    towerMotor.set(ControlMode.PercentOutput, 0.4);
   }
 
   public void stopTower() {
-    towerMotor.set(ControlMode.PercentOutput, 0.3);
+    towerMotor.set(ControlMode.PercentOutput, 0.0);
   }
   
   public void reverseTower() {
-    towerMotor.set(ControlMode.PercentOutput, -0.2);
+    towerMotor.set(ControlMode.PercentOutput, -0.4);
   }
 
   /*Switch Methods*/
@@ -80,7 +80,7 @@ public class Intake extends SubsystemBase {
       return towerState;
     }
 
-    //case 2: balls at top but not full (can shoot freely, must bring down to shoot)
+    //case 2: balls at top but not full (can shoot freely, must bring down to intake)
     else if(ballAtTowerTop() && !ballAtTowerBottom()) {
       towerState = 'T';
       return towerState;
