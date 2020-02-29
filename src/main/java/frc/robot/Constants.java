@@ -19,14 +19,20 @@ public final class Constants {
     public static int kLeftVictorID  = 2;
     public static int kRightTalonID  = 4;
     public static int kRightVictorID = 3;
+<<<<<<< HEAD
     public static int kShooterTalonID = 4;
     public static int kShooterTalonFollowerID = 8;
+=======
+    public static int kShooterTalonID = 10;
+>>>>>>> e479fbee1539bfcb7c71b4fd107e7f91108642b1
 
     //window to check for the completion of ctre methods
     public static int kTimeoutMs = 30;
 
-    //Drive Characteristics
+    //Motor Characteristics
     public static int maxDriveRPM = 495;
+    public static int maxShooterRPM = 4000; 
+
     //max throttle change in a second
     public static double kThrottleSlewRate = 1.1;
     public static double kTurnSlewRate = 0.9;
