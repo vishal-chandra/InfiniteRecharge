@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.PWMTalonSRX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import static frc.robot.Constants.*;
@@ -18,15 +19,15 @@ import static frc.robot.Constants.*;
 public class Intake extends SubsystemBase {
   
   DigitalInput intakeSwitch, towerBottomSwitch, towerTopSwitch;
-  TalonSRX intakeMotor, towerMotor;
+  TalonSRX towerMotor;
+  PWMTalonSRX intakeMotor;
 
   char towerState = ' ';
 
   public Intake() {
 
     //motor setup
-    intakeMotor = new TalonSRX(kIntakeTalonID);
-    intakeMotor.configFactoryDefault();
+    intakeMotor = new PWMTalonSRX(kIntakeTalonID);
 
     towerMotor = new TalonSRX(kTowerTalonID);
     towerMotor.configFactoryDefault();
@@ -40,11 +41,11 @@ public class Intake extends SubsystemBase {
 
   /*Motor Methods*/
   public void runIntake() {
-    intakeMotor.set(ControlMode.PercentOutput, -1.0);
+    intakeMotor.set(-1.0);
   }
 
   public void stopIntake() {
-    intakeMotor.set(ControlMode.PercentOutput, 0.0);
+    intakeMotor.set(0.0);
   }
 
   public void runTower() {
