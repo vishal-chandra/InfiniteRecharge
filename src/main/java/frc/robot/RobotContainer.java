@@ -4,9 +4,8 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import frc.robot.subsystems.*;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.RunCommand;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.commands.*;
+import edu.wpi.first.wpilibj2.command.*;
 
 //3205
 //import frc.robot.commands.*;
@@ -24,6 +23,8 @@ public class RobotContainer {
 
   // The robot's subsystems and commands are defined here...
   public final Drive drive = new Drive();
+  public final Intake intake = new Intake();
+
   private final Command m_autoCommand = new WaitCommand(0);
 
 
@@ -45,6 +46,9 @@ public class RobotContainer {
       drive)
     );
 
+    intake.setDefaultCommand(
+      new RunCommand(() -> intake.getTowerState(), intake)
+    );
   }
 
   /**
