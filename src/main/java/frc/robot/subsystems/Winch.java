@@ -10,7 +10,6 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 //CTRE
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.*;
 
@@ -19,33 +18,33 @@ import static frc.robot.Constants.*;
 
 public class Winch extends SubsystemBase {
   
-  TalonSRX winchElevatorTalon; //motor that raises elevator
-  TalonSRX winchHookTalon; //motor that pulls robot up
+  VictorSPX winchElevatorVictor; //motor that raises elevator
+  VictorSPX winchHookVictor; //motor that pulls robot up
   
   /**
    * Creates a new Winch.
    */
   public Winch() {
     //init hardware
-    winchElevatorTalon = new TalonSRX(kWinchElevatorID);
-    winchHookTalon = new TalonSRX(kWinchHookID);
+    winchElevatorVictor = new VictorSPX(kWinchElevatorID);
+    winchHookVictor = new VictorSPX(kWinchHookID);
 
   }
 
   public void startElevatorMotor() {
-    winchElevatorTalon.set(ControlMode.PercentOutput, 0.2);
+    winchElevatorVictor.set(ControlMode.PercentOutput, 0.2);
   }
 
   public void startHookMotor() {
-    winchHookTalon.set(ControlMode.PercentOutput, 0.2);
+    winchHookVictor.set(ControlMode.PercentOutput, 0.2);
   }
 
   public void stopElevatorMotor() {
-    winchElevatorTalon.set(ControlMode.PercentOutput, 0);
+    winchElevatorVictor.set(ControlMode.PercentOutput, 0);
   }
 
   public void stopHookMotor() {
-    winchHookTalon.set(ControlMode.PercentOutput, 0);
+    winchHookVictor.set(ControlMode.PercentOutput, 0);
   }
 
   @Override
