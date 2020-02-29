@@ -24,7 +24,7 @@ public final class Constants {
     public static int kLeftVictorID  = 2;
     public static int kRightTalonID  = 4;
     public static int kRightVictorID = 3;
-    public static int kIntakeTalonPort = 1;
+    public static int kIntakeTalonPort = 2;
     public static int kTowerTalonID  = 3;
 
     //window to check for the completion of ctre methods

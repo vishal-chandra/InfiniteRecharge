@@ -3,9 +3,11 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.XboxController.Button;
 import frc.robot.subsystems.*;
 import frc.robot.commands.*;
 import edu.wpi.first.wpilibj2.command.*;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 //3205
 //import frc.robot.commands.*;
@@ -24,6 +26,12 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   public final Drive drive = new Drive();
   public final Intake intake = new Intake();
+
+  IntakeBall intakeBall = new IntakeBall(intake);
+  IndexEmpty indexEmpty = new IndexEmpty(intake);
+  BringUp bringUp = new BringUp(intake);
+  BringDown bringDown = new BringDown(intake);
+  Index index = new Index(intake);
 
   private final Command m_autoCommand = new WaitCommand(0);
 
@@ -58,6 +66,10 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    new JoystickButton(xbox, Button.kA.value).whenPressed(intakeBall);
+    new JoystickButton(xbox, Button.kB.value).whenPressed(indexEmpty);
+    new JoystickButton(xbox, Button.kY.value).whenPressed(bringUp);
+    new JoystickButton(xbox, Button.kX.value).whenPressed(index);
   }
 
 

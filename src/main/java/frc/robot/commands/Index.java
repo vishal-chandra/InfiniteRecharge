@@ -23,16 +23,17 @@ public class Index extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    lastBoolean = intake.ballInIntake();
+    lastBoolean = intake.ballAtTowerBottom();
     intake.runTower();
+    intake.runIntake();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(intake.ballInIntake() != lastBoolean) {
+    if(intake.ballAtTowerBottom() != lastBoolean) {
       switchFlipCount++;
-      lastBoolean = intake.ballInIntake();
+      lastBoolean = intake.ballAtTowerBottom();
     }
   }
 
@@ -40,6 +41,7 @@ public class Index extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     intake.stopTower();
+    intake.stopIntake();
   }
 
   // Returns true when the command should end.
