@@ -54,6 +54,10 @@ public class Intake extends SubsystemBase {
   public void stopTower() {
     towerMotor.set(ControlMode.PercentOutput, 0.3);
   }
+  
+  public void reverseTower() {
+    towerMotor.set(ControlMode.PercentOutput, -0.2);
+  }
 
   /*Switch Methods*/
   public boolean ballInIntake() {
