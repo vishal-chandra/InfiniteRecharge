@@ -71,7 +71,7 @@ public class ColorWheel extends SubsystemBase {
    * see https://docs.wpilib.org/en/latest/docs/software/wpilib-overview/2020-Game-Data.html
    */
   public void getColorCommand() {
-    String fieldColor = "R"; //DriverStation.getInstance().getGameSpecificMessage();
+    String fieldColor = "G"; //DriverStation.getInstance().getGameSpecificMessage();
 
     if(fieldColor.length() > 0) {
       switch(fieldColor.charAt(0)) {

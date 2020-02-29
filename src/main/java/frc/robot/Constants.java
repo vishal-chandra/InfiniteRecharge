@@ -19,7 +19,7 @@ public final class Constants {
     public static int kLeftVictorID  = 2;
     public static int kRightTalonID  = 4;
     public static int kRightVictorID = 3;
-    public static int kColorWheelTalonID = 10;
+    public static int kColorWheelTalonID = 7;
 
     //window to check for the completion of ctre methods
     public static int kTimeoutMs = 30;
