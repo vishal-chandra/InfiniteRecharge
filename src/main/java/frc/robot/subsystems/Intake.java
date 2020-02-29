@@ -77,29 +77,34 @@ public class Intake extends SubsystemBase {
     //case 1: empty (can't shoot, can intake freely)
     if(!ballAtTowerBottom() && !ballAtTowerTop()) {
       towerState = 'E';
+      System.out.println(towerState);
       return towerState;
     }
 
     //case 2: balls at top but not full (can shoot freely, must bring down to intake)
     else if(ballAtTowerTop() && !ballAtTowerBottom()) {
       towerState = 'T';
+      System.out.println(towerState);
       return towerState;
     }
 
     //case 3: balls at bottom but not full (must bring up to shoot, can intake freely)
     else if(ballAtTowerBottom() && !ballAtTowerTop()) {
       towerState = 'B';
+      System.out.println(towerState);
       return towerState;
     }
 
     //case 4: full (can shoot freely, can't intake)
     else if(ballAtTowerBottom() && ballAtTowerTop() && ballInIntake()) {
       towerState = 'F';
+      System.out.println(towerState);
       return towerState;
     }
 
     else {
       towerState = 'U';
+      System.out.println(towerState);
       return towerState;
     }
   }
