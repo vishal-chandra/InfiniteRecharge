@@ -24,7 +24,7 @@ public final class Constants {
     public static int kTimeoutMs = 30;
 
     //Drive Characteristics 
-    public static int maxDriveRPM = 495;
+    public static int maxDriveRPM = 567;
     //max throttle change in a second
     public static double kThrottleSlewRate = 1.1;
     public static double kTurnSlewRate = 0.9;
