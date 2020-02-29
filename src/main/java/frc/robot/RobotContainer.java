@@ -7,6 +7,7 @@ import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 //3205
 //import frc.robot.commands.*;
@@ -25,6 +26,8 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   public final Drive drive = new Drive();
   private final Command m_autoCommand = new WaitCommand(0);
+
+  private final Winch winch = new Winch();
 
 
   /**
@@ -54,6 +57,12 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    new JoystickButton(xbox, XboxController.Button.kX.value)
+    .whenPressed(new WinchElevator(winch));
+
+    new JoystickButton(xbox, XboxController.Button.kY.value)
+    .whenPressed(new WinchHook(winch));
+
   }
 
 
