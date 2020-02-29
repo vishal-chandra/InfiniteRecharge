@@ -26,7 +26,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   public final Drive drive = new Drive();
   private final Vision vision = new Vision();
-  private final VisionAim visionAim = new VisionAim();
+  private final VisionAim visionAim = new VisionAim(vision, drive);
 
   private final Command m_autoCommand = new WaitCommand(0);
 
@@ -41,11 +41,7 @@ public class RobotContainer {
     //constantly look at the sticks and pass them to drivebase
     drive.setDefaultCommand(
       new RunCommand(
-      () -> drive.curvatureDrive(
-          xbox.getY(Hand.kLeft), 
-          -xbox.getX(Hand.kRight) //for some reason this needs to be reversed
-      ),
-      drive)
+      () -> checkVisionAim())
     );
 
     //constantly posts limelight reading values on NetworkTables
