@@ -24,14 +24,14 @@ public final class Constants {
     public static int kLeftVictorID  = 2;
     public static int kRightTalonID  = 4;
     public static int kRightVictorID = 3;
-    public static int kIntakeTalonID = 10;
-    public static int kTowerTalonID  = 20;
+    public static int kIntakeTalonPort = 1;
+    public static int kTowerTalonID  = 3;
 
     //window to check for the completion of ctre methods
     public static int kTimeoutMs = 30;
 
     //Drive Characteristics
-    public static int maxDriveRPM = 495;
+    public static int maxDriveRPM = 567;
     //max throttle change in a second
     public static double kThrottleSlewRate = 1.1;
     public static double kTurnSlewRate = 0.9;

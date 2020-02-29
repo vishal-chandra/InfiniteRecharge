@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.PWMTalonSRX;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import static frc.robot.Constants.*;
@@ -27,7 +28,7 @@ public class Intake extends SubsystemBase {
   public Intake() {
 
     //motor setup
-    intakeMotor = new PWMTalonSRX(kIntakeTalonID);
+    intakeMotor = new PWMTalonSRX(kIntakeTalonPort);
 
     towerMotor = new TalonSRX(kTowerTalonID);
     towerMotor.configFactoryDefault();
@@ -110,4 +111,10 @@ public class Intake extends SubsystemBase {
     }
   }
 
+  public void updateShuffleboard() {
+    SmartDashboard.putBoolean("intakeSwitch", ballInIntake());
+    SmartDashboard.putBoolean("towerBottomSwitch", ballAtTowerBottom());
+    SmartDashboard.putBoolean("towerTopSwitch", ballAtTowerTop());
+  }
+  
 }
