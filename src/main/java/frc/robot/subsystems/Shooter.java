@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-=======
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2019 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
->>>>>>> e479fbee1539bfcb7c71b4fd107e7f91108642b1
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -20,8 +10,8 @@ import static frc.robot.Constants.*;
 
 public class Shooter extends SubsystemBase {
   
-  TalonSRX shooterTalon;
-  double shootRPM = commandToTargetVelocity(0.8);
+  TalonSRX shooterTalon, shooterFollower;
+  double shootRPM = commandToTargetVelocity(1);
   int shooterTolerance = 300; //this is in ticks per 100ms
 
   public Shooter() {
@@ -75,8 +65,4 @@ public class Shooter extends SubsystemBase {
     return command * maxDriveRPM * 4096 / 600;
   }
 
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> e479fbee1539bfcb7c71b4fd107e7f91108642b1
