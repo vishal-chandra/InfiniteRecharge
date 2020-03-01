@@ -34,6 +34,10 @@ public class Shooter extends SubsystemBase {
     shooterTalon.config_kP(0, shooterGains.kP, kTimeoutMs);
     shooterTalon.config_kI(0, shooterGains.kI, kTimeoutMs);
     shooterTalon.config_kD(0, shooterGains.kD, kTimeoutMs);
+
+    shooterFollower = new TalonSRX(kShooterFollowerID);
+    shooterFollower.configFactoryDefault();
+    shooterFollower.follow(shooterTalon); 
   }
 
   public void startFlywheels() {
