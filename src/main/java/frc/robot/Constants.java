@@ -19,19 +19,15 @@ public final class Constants {
     public static int kLeftVictorID  = 2;
     public static int kRightTalonID  = 4;
     public static int kRightVictorID = 3;
-<<<<<<< HEAD
     public static int kShooterTalonID = 4;
     public static int kShooterTalonFollowerID = 8;
-=======
-    public static int kShooterTalonID = 10;
->>>>>>> e479fbee1539bfcb7c71b4fd107e7f91108642b1
 
     //window to check for the completion of ctre methods
     public static int kTimeoutMs = 30;
 
     //Motor Characteristics
     public static int maxDriveRPM = 495;
-    public static int maxShooterRPM = 4000; 
+    public static int maxShooterRPM = 9450;
 
     //max throttle change in a second
     public static double kThrottleSlewRate = 1.1;
@@ -41,5 +37,5 @@ public final class Constants {
     //gearing on new robot is 8.46:1
     public static Gains leftDriveGains  = new Gains(0.3053, 0.3, 0, 0); 
     public static Gains rightDriveGains = new Gains(0.3053, 0.3, 0, 0);
-    public static Gains shooterGains    = new Gains(0, 0, 0, 0);
+    public static Gains shooterGains    = new Gains(0.0158, 0, 0, 0);
 }

@@ -11,7 +11,7 @@ import static frc.robot.Constants.*;
 public class Shooter extends SubsystemBase {
   
   TalonSRX shooterTalon, shooterFollower;
-  double shootRPM = commandToTargetVelocity(1);
+  double shootCommand = commandToTargetVelocity(1);
   int shooterTolerance = 300; //this is in ticks per 100ms
 
   public Shooter() {
@@ -36,7 +36,7 @@ public class Shooter extends SubsystemBase {
   }
 
   public void startFlywheels() {
-    shooterTalon.set(ControlMode.Velocity, shootRPM);
+    shooterTalon.set(ControlMode.Velocity, shootCommand);
   }
 
   public void stopFlywheels() {
@@ -44,7 +44,7 @@ public class Shooter extends SubsystemBase {
   }
 
   public boolean checkRPM() {
-    if(Math.abs(shooterTalon.getSelectedSensorVelocity() - shootRPM) < shooterTolerance)
+    if(Math.abs(shooterTalon.getSelectedSensorVelocity() - shootCommand) < shooterTolerance)
       return true;
     else return false;
   }
@@ -62,7 +62,7 @@ public class Shooter extends SubsystemBase {
     //convert command to a percentage of maxRPM, 
     //then convert revolutions to units
     //and minutes to 100ms
-    return command * maxDriveRPM * 4096 / 600;
+    return command * maxShooterRPM * 4096 / 600;
   }
 
 }
