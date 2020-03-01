@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import static frc.robot.Constants.*;
@@ -63,6 +64,12 @@ public class Shooter extends SubsystemBase {
     //then convert revolutions to units
     //and minutes to 100ms
     return command * maxShooterRPM * 4096 / 600;
+  }
+
+  public void updateShuffleboard() {
+    SmartDashboard.putNumber("shooterCommand", shooterTalon.getClosedLoopTarget());
+    SmartDashboard.putNumber("shooterVel", shooterTalon.getSelectedSensorVelocity());
+    SmartDashboard.putNumber("shooterError", shooterTalon.getClosedLoopError());
   }
 
 }

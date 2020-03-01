@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 //3205
-//import frc.robot.commands.*;
+import frc.robot.commands.*;
 import static frc.robot.Constants.*;
 
 /**
@@ -24,6 +24,7 @@ public class RobotContainer {
 
   // The robot's subsystems and commands are defined here...
   public final Drive drive = new Drive();
+  public final Shooter shooter = new Shooter();
   private final Command m_autoCommand = new WaitCommand(0);
 
 
