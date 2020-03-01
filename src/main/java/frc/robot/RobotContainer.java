@@ -32,6 +32,7 @@ public class RobotContainer {
   BringUp bringUp = new BringUp(intake);
   BringDown bringDown = new BringDown(intake);
   Index index = new Index(intake);
+  FeedBall feedBall = new FeedBall(intake);
 
   private final Command m_autoCommand = new WaitCommand(0);
 
@@ -69,7 +70,7 @@ public class RobotContainer {
     new JoystickButton(xbox, Button.kA.value).whenPressed(intakeBall);
     new JoystickButton(xbox, Button.kB.value).whenPressed(indexEmpty);
     new JoystickButton(xbox, Button.kY.value).whenPressed(bringUp);
-    new JoystickButton(xbox, Button.kX.value).whenPressed(index);
+    new JoystickButton(xbox, Button.kX.value).whenPressed(feedBall);
   }
 
 
