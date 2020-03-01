@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -12,7 +13,7 @@ import static frc.robot.Constants.*;
 public class Shooter extends SubsystemBase {
   
   TalonSRX shooterTalon, shooterFollower;
-  double shootCommand = commandToTargetVelocity(1);
+  double shootCommand = commandToTargetVelocity(0.4);
   int shooterTolerance = 300; //this is in ticks per 100ms
 
   public Shooter() {
@@ -21,14 +22,7 @@ public class Shooter extends SubsystemBase {
 
     shooterTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 
                                               0, kTimeoutMs);
-    shooterTalon.setSensorPhase(false);
-
-    //minimum
-    shooterTalon.configNominalOutputForward(0, kTimeoutMs);
-    shooterTalon.configNominalOutputReverse(0, kTimeoutMs);
-    //maximum
-    shooterTalon.configPeakOutputForward(1, kTimeoutMs);
-    shooterTalon.configPeakOutputReverse(-1, kTimeoutMs);
+    shooterTalon.setSensorPhase(true);
 
     shooterTalon.config_kF(0, shooterGains.kF, kTimeoutMs);
     shooterTalon.config_kP(0, shooterGains.kP, kTimeoutMs);
@@ -37,14 +31,17 @@ public class Shooter extends SubsystemBase {
 
     shooterFollower = new TalonSRX(kShooterFollowerID);
     shooterFollower.configFactoryDefault();
+    shooterFollower.setInverted(InvertType.FollowMaster);
     shooterFollower.follow(shooterTalon); 
   }
 
   public void startFlywheels() {
+    System.out.println("start called");
     shooterTalon.set(ControlMode.Velocity, shootCommand);
   }
 
   public void stopFlywheels() {
+    System.out.println("stop called");
     shooterTalon.set(ControlMode.Velocity, commandToTargetVelocity(0));
   }
 

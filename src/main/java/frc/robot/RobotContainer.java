@@ -59,10 +59,8 @@ public class RobotContainer {
   private void configureButtonBindings() {
 
     new JoystickButton(xbox, Button.kA.value)
-      .whenPressed(new InstantCommand(() -> shooter.startFlywheels()));
-    
-    new JoystickButton(xbox, Button.kB.value)
-      .whenPressed(new InstantCommand(() -> shooter.stopFlywheels()));
+      .whenPressed(() -> shooter.startFlywheels())
+      .whenReleased(() -> shooter.stopFlywheels());
   }
 
 

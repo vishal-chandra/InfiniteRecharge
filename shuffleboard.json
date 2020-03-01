@@ -10,100 +10,24 @@
         "hgap": 16.0,
         "vgap": 16.0,
         "tiles": {
-          "4,0": {
+          "2,0": {
             "size": [
-              3,
+              4,
               3
             ],
             "content": {
               "_type": "Graph",
-              "_source0": "network_table:///driveMonitor/rightErr",
-              "_title": "driveMonitor/rightErr",
+              "_source0": "network_table:///SmartDashboard/shooterVel",
+              "_source1": "network_table:///SmartDashboard/shooterError",
+              "_source2": "network_table:///SmartDashboard/shooterCommand",
+              "_title": "SmartDashboard/shooterVel",
               "Graph/Visible time": 30.0,
               "Y-axis/Automatic bounds": true,
               "Y-axis/Upper bound": 1.0,
-              "Y-axis/Lower bound": -1.0
-            }
-          },
-          "1,0": {
-            "size": [
-              3,
-              3
-            ],
-            "content": {
-              "_type": "Graph",
-              "_source0": "network_table:///driveMonitor/leftErr",
-              "_title": "driveMonitor/leftErr",
-              "Graph/Visible time": 30.0,
-              "Y-axis/Automatic bounds": true,
-              "Y-axis/Upper bound": 1.0,
-              "Y-axis/Lower bound": -1.0
-            }
-          },
-          "0,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/leftDriveError",
-              "_title": "leftDriveError"
-            }
-          },
-          "0,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/leftVel",
-              "_title": "leftVel"
-            }
-          },
-          "0,2": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/leftTarget",
-              "_title": "leftTarget"
-            }
-          },
-          "7,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Limelight_PipelineName",
-              "_title": "Limelight_PipelineName"
-            }
-          },
-          "7,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Limelight_Stream",
-              "_title": "Limelight_Stream"
-            }
-          },
-          "7,2": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Limelight_Interface",
-              "_title": "Limelight_Interface"
+              "Y-axis/Lower bound": -1.0,
+              "Visible data/SmartDashboard/shooterCommand": true,
+              "Visible data/SmartDashboard/shooterError": true,
+              "Visible data/SmartDashboard/shooterVel": true
             }
           }
         }
@@ -118,14 +42,66 @@
         "showGrid": true,
         "hgap": 16.0,
         "vgap": 16.0,
-        "tiles": {}
+        "tiles": {
+          "0,0": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Speed Controller",
+              "_source0": "network_table:///LiveWindow/Ungrouped/PWMVictorSPX[2]",
+              "_title": "Ungrouped/PWMVictorSPX[2]",
+              "Visuals/Orientation": "HORIZONTAL"
+            }
+          },
+          "2,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///LiveWindow/Ungrouped/DigitalInput[1]/Value",
+              "_title": "Ungrouped/DigitalInput[1]/Value",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "3,0": {
+            "size": [
+              2,
+              4
+            ],
+            "content": {
+              "_type": "Subsystem Layout",
+              "_source0": "network_table:///LiveWindow/Shooter",
+              "_title": "Shooter",
+              "Layout/Label position": "BOTTOM",
+              "_children": []
+            }
+          },
+          "5,0": {
+            "size": [
+              2,
+              4
+            ],
+            "content": {
+              "_type": "Subsystem Layout",
+              "_source0": "network_table:///LiveWindow/Ungrouped",
+              "_title": "Ungrouped",
+              "Layout/Label position": "BOTTOM",
+              "_children": []
+            }
+          }
+        }
       }
     }
   ],
   "windowGeometry": {
-    "x": 0.0,
-    "y": 0.0,
-    "width": 1280.0,
-    "height": 680.0
+    "x": -7.333333492279053,
+    "y": -7.333333492279053,
+    "width": 1294.6666259765625,
+    "height": 694.6666870117188
   }
 }
