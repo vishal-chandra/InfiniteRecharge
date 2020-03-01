@@ -58,6 +58,10 @@ public class RotationControl extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    if(!colorWheel.getSwitch()) {
+      colorPasses = 0;
+      return true;
+    }
     if(colorPasses == 6) {
       colorPasses = 0; //reset to original state
       return true;

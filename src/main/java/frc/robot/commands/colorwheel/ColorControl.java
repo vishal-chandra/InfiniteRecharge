@@ -40,10 +40,9 @@ public class ColorControl extends CommandBase {
   @Override
   public boolean isFinished() {
 
-    //commented out because we don't have a switch
-    // if(!colorWheel.getSwitch()) { //end if we're not touching the wheel
-    //   return true;
-    // }
+    if(!colorWheel.getSwitch()) { //end if we're not touching the wheel
+      return true;
+    }
     //end as soon as we've reached the right color
     if(colorWheel.readColor() == colorWheel.sensorColorCommand) {
       return true;

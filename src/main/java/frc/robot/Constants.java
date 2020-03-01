@@ -25,7 +25,7 @@ public final class Constants {
     public static int kTimeoutMs = 30;
 
     //DIO ports
-    public static int kColorWheelSwitchPort = 10;
+    public static int kColorWheelSwitchPort = 0;
 
     //Drive Characteristics
     public static int maxDriveRPM = 495;
