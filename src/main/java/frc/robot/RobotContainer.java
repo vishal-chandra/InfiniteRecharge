@@ -29,6 +29,8 @@ public class RobotContainer {
   public final Shooter shooter = new Shooter();
   private final Command m_autoCommand = new WaitCommand(0);
 
+  StartFlywheels startFlywheels = new StartFlywheels(shooter);
+
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -58,9 +60,8 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    new JoystickButton(xbox, Button.kA.value)
-      .whenPressed(() -> shooter.startFlywheels())
-      .whenReleased(() -> shooter.stopFlywheels());
+    new JoystickButton(xbox, Button.kA.value).whenPressed(startFlywheels);
+    new JoystickButton(xbox, Button.kB.value).whenPressed(new InstantCommand(() -> shooter.stopFlywheels()));
   }
 
 

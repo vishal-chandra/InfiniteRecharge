@@ -5,6 +5,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import edu.wpi.first.wpilibj.SlewRateLimiter;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -13,7 +14,10 @@ import static frc.robot.Constants.*;
 public class Shooter extends SubsystemBase {
   
   TalonSRX shooterTalon, shooterFollower;
-  double shootCommand = commandToTargetVelocity(0.4);
+
+  public SlewRateLimiter shooterRamp;
+  public double shootCommand;
+
   int shooterTolerance = 300; //this is in ticks per 100ms
 
   public Shooter() {
@@ -33,16 +37,18 @@ public class Shooter extends SubsystemBase {
     shooterFollower.configFactoryDefault();
     shooterFollower.setInverted(InvertType.FollowMaster);
     shooterFollower.follow(shooterTalon); 
+
+    shooterRamp = new SlewRateLimiter(kShooterSlewRate);
+
+    shootCommand = commandToTargetVelocity(shootPower);
   }
 
-  public void startFlywheels() {
-    System.out.println("start called");
-    shooterTalon.set(ControlMode.Velocity, shootCommand);
+  public void setFlywheels(double power) {
+    shooterTalon.set(ControlMode.Velocity, commandToTargetVelocity(shooterRamp.calculate(power)));
   }
 
   public void stopFlywheels() {
-    System.out.println("stop called");
-    shooterTalon.set(ControlMode.Velocity, commandToTargetVelocity(0));
+    shooterTalon.set(ControlMode.PercentOutput, 0.0);
   }
 
   public boolean checkRPM() {

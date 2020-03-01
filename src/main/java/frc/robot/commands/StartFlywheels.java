@@ -9,23 +9,31 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.*;
+import static frc.robot.Constants.*;
 
-public class ActivateShooter extends CommandBase {
+public class StartFlywheels extends CommandBase {
   
   Shooter shooter;
 
-  public ActivateShooter(Shooter shooterSystem) {
+  public StartFlywheels(Shooter shooterSystem) {
     shooter = shooterSystem;
-    addRequirements(shooter);
   }
 
+
+  // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void initialize() {
-    shooter.startFlywheels();
+  public void execute() {
+    shooter.setFlywheels(shootPower);
   }
-  
+
+  // Called once the command ends or is interrupted.
+  @Override
+  public void end(boolean interrupted) {
+  }
+
+  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return shooter.checkRPM();
+    return shooter.shooterRamp.calculate(shootPower) == shootPower;
   }
 }
