@@ -4,14 +4,13 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.XboxController.Button;
-import frc.robot.subsystems.*;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.RunCommand;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
+
+import edu.wpi.first.wpilibj2.command.*;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+
 //3205
 import frc.robot.commands.*;
+import frc.robot.subsystems.*;
 import static frc.robot.Constants.*;
 
 /**
@@ -27,6 +26,15 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   public final Drive drive = new Drive();
   public final Shooter shooter = new Shooter();
+  public final Intake intake = new Intake();
+
+  IntakeBall intakeBall = new IntakeBall(intake);
+  IndexEmpty indexEmpty = new IndexEmpty(intake);
+  BringUp bringUp = new BringUp(intake);
+  BringDown bringDown = new BringDown(intake);
+  Index index = new Index(intake);
+  FeedBall feedBall = new FeedBall(intake);
+
   private final Command m_autoCommand = new WaitCommand(0);
 
   StartFlywheels startFlywheels = new StartFlywheels(shooter);
@@ -50,6 +58,9 @@ public class RobotContainer {
       drive)
     );
 
+    intake.setDefaultCommand(
+      new RunCommand(() -> intake.getTowerState(), intake)
+    );
   }
 
   /**
@@ -62,6 +73,11 @@ public class RobotContainer {
 
     new JoystickButton(xbox, Button.kA.value).whenPressed(startFlywheels);
     new JoystickButton(xbox, Button.kB.value).whenPressed(new InstantCommand(() -> shooter.stopFlywheels()));
+    
+    new JoystickButton(xbox, Button.kA.value).whenPressed(intakeBall);
+    new JoystickButton(xbox, Button.kB.value).whenPressed(indexEmpty);
+    new JoystickButton(xbox, Button.kY.value).whenPressed(bringUp);
+    new JoystickButton(xbox, Button.kX.value).whenPressed(feedBall);
   }
 
 

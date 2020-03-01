@@ -10,6 +10,7 @@
         "hgap": 16.0,
         "vgap": 16.0,
         "tiles": {
+<<<<<<< HEAD
           "2,0": {
             "size": [
               4,
@@ -44,11 +45,28 @@
         "vgap": 16.0,
         "tiles": {
           "0,0": {
+=======
+          "3,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/towerBottomSwitch",
+              "_title": "SmartDashboard/towerBottomSwitch",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "3,0": {
+>>>>>>> intakeintegration
             "size": [
               2,
               1
             ],
             "content": {
+<<<<<<< HEAD
               "_type": "Speed Controller",
               "_source0": "network_table:///LiveWindow/Ungrouped/PWMVictorSPX[2]",
               "_title": "Ungrouped/PWMVictorSPX[2]",
@@ -56,12 +74,23 @@
             }
           },
           "2,0": {
+=======
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/towerTopSwitch",
+              "_title": "SmartDashboard/towerTopSwitch",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "3,2": {
+>>>>>>> intakeintegration
             "size": [
               1,
               1
             ],
             "content": {
               "_type": "Boolean Box",
+<<<<<<< HEAD
               "_source0": "network_table:///LiveWindow/Ungrouped/DigitalInput[1]/Value",
               "_title": "Ungrouped/DigitalInput[1]/Value",
               "Colors/Color when true": "#7CFC00FF",
@@ -92,6 +121,76 @@
               "_title": "Ungrouped",
               "Layout/Label position": "BOTTOM",
               "_children": []
+=======
+              "_source0": "network_table:///SmartDashboard/intakeSwitch",
+              "_title": "SmartDashboard/intakeSwitch",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "LiveWindow",
+      "autoPopulate": true,
+      "autoPopulatePrefix": "LiveWindow/",
+      "widgetPane": {
+        "gridSize": 128.0,
+        "showGrid": true,
+        "hgap": 16.0,
+        "vgap": 16.0,
+        "tiles": {
+          "0,0": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Speed Controller",
+              "_source0": "network_table:///LiveWindow/Ungrouped/PWMTalonSRX[1]",
+              "_title": "Ungrouped/PWMTalonSRX[1]",
+              "Visuals/Orientation": "HORIZONTAL"
+            }
+          },
+          "2,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///LiveWindow/Ungrouped/DigitalInput[3]/Value",
+              "_title": "Ungrouped/DigitalInput[3]/Value",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "3,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///LiveWindow/Ungrouped/DigitalInput[2]/Value",
+              "_title": "Ungrouped/DigitalInput[2]/Value",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "4,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///LiveWindow/Ungrouped/DigitalInput[1]/Value",
+              "_title": "Ungrouped/DigitalInput[1]/Value",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+>>>>>>> intakeintegration
             }
           }
         }
