@@ -42,7 +42,7 @@ public class Intake extends SubsystemBase {
 
   /*Motor Methods*/
   public void runIntake() {
-    intakeMotor.set(-1.0);
+    intakeMotor.set(1.0);
   }
 
   public void stopIntake() {
@@ -50,7 +50,7 @@ public class Intake extends SubsystemBase {
   }
 
   public void runTower() {
-    towerMotor.set(ControlMode.PercentOutput, 0.4);
+    towerMotor.set(ControlMode.PercentOutput, -0.4);
   }
 
   public void stopTower() {
@@ -58,12 +58,12 @@ public class Intake extends SubsystemBase {
   }
   
   public void reverseTower() {
-    towerMotor.set(ControlMode.PercentOutput, -0.4);
+    towerMotor.set(ControlMode.PercentOutput, 0.4);
   }
 
   /*Switch Methods*/
   public boolean ballInIntake() {
-    return intakeSwitch.get();
+    return !intakeSwitch.get();
   }
 
   public boolean ballAtTowerBottom() {

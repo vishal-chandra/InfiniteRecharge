@@ -20,6 +20,7 @@ public class IndexEmpty extends CommandBase {
   @Override
   public void initialize() {
     intake.runTower();
+    intake.runIntake();
   }
 
   @Override
@@ -30,6 +31,7 @@ public class IndexEmpty extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     intake.stopTower();
+    intake.stopIntake();
   }
 
   // Returns true when the command should end.
