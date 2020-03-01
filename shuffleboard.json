@@ -10,25 +10,96 @@
         "hgap": 16.0,
         "vgap": 16.0,
         "tiles": {
-<<<<<<< HEAD
-          "2,0": {
+          "1,0": {
             "size": [
-              4,
+              5,
               3
             ],
             "content": {
               "_type": "Graph",
-              "_source0": "network_table:///SmartDashboard/shooterVel",
-              "_source1": "network_table:///SmartDashboard/shooterError",
-              "_source2": "network_table:///SmartDashboard/shooterCommand",
+              "_source0": "network_table:///SmartDashboard/shooterCommand",
+              "_source1": "network_table:///SmartDashboard/shooterVel",
+              "_source2": "network_table:///SmartDashboard/shooterError",
               "_title": "SmartDashboard/shooterVel",
               "Graph/Visible time": 30.0,
               "Y-axis/Automatic bounds": true,
               "Y-axis/Upper bound": 1.0,
               "Y-axis/Lower bound": -1.0,
-              "Visible data/SmartDashboard/shooterCommand": true,
-              "Visible data/SmartDashboard/shooterError": true,
-              "Visible data/SmartDashboard/shooterVel": true
+              "Visible data/SmartDashboard/shooterCommand": false,
+              "Visible data/SmartDashboard/shooterError": false,
+              "Visible data/SmartDashboard/shooterVel": false
+            }
+          },
+          "0,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Limelight_PipelineName",
+              "_title": "Limelight_PipelineName"
+            }
+          },
+          "6,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Limelight_Stream",
+              "_title": "Limelight_Stream"
+            }
+          },
+          "7,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Limelight_Interface",
+              "_title": "Limelight_Interface"
+            }
+          },
+          "0,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/intakeSwitch",
+              "_title": "intakeSwitch",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "6,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/towerBottomSwitch",
+              "_title": "towerBottomSwitch",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "7,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/towerTopSwitch",
+              "_title": "towerTopSwitch",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
             }
           }
         }
@@ -45,28 +116,11 @@
         "vgap": 16.0,
         "tiles": {
           "0,0": {
-=======
-          "3,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/towerBottomSwitch",
-              "_title": "SmartDashboard/towerBottomSwitch",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "3,0": {
->>>>>>> intakeintegration
             "size": [
               2,
               1
             ],
             "content": {
-<<<<<<< HEAD
               "_type": "Speed Controller",
               "_source0": "network_table:///LiveWindow/Ungrouped/PWMVictorSPX[2]",
               "_title": "Ungrouped/PWMVictorSPX[2]",
@@ -74,23 +128,12 @@
             }
           },
           "2,0": {
-=======
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/towerTopSwitch",
-              "_title": "SmartDashboard/towerTopSwitch",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "3,2": {
->>>>>>> intakeintegration
             "size": [
               1,
               1
             ],
             "content": {
               "_type": "Boolean Box",
-<<<<<<< HEAD
               "_source0": "network_table:///LiveWindow/Ungrouped/DigitalInput[1]/Value",
               "_title": "Ungrouped/DigitalInput[1]/Value",
               "Colors/Color when true": "#7CFC00FF",
@@ -120,77 +163,28 @@
               "_source0": "network_table:///LiveWindow/Ungrouped",
               "_title": "Ungrouped",
               "Layout/Label position": "BOTTOM",
-              "_children": []
-=======
-              "_source0": "network_table:///SmartDashboard/intakeSwitch",
-              "_title": "SmartDashboard/intakeSwitch",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          }
-        }
-      }
-    },
-    {
-      "title": "LiveWindow",
-      "autoPopulate": true,
-      "autoPopulatePrefix": "LiveWindow/",
-      "widgetPane": {
-        "gridSize": 128.0,
-        "showGrid": true,
-        "hgap": 16.0,
-        "vgap": 16.0,
-        "tiles": {
-          "0,0": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Speed Controller",
-              "_source0": "network_table:///LiveWindow/Ungrouped/PWMTalonSRX[1]",
-              "_title": "Ungrouped/PWMTalonSRX[1]",
-              "Visuals/Orientation": "HORIZONTAL"
-            }
-          },
-          "2,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///LiveWindow/Ungrouped/DigitalInput[3]/Value",
-              "_title": "Ungrouped/DigitalInput[3]/Value",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "3,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///LiveWindow/Ungrouped/DigitalInput[2]/Value",
-              "_title": "Ungrouped/DigitalInput[2]/Value",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "4,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///LiveWindow/Ungrouped/DigitalInput[1]/Value",
-              "_title": "Ungrouped/DigitalInput[1]/Value",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
->>>>>>> intakeintegration
+              "_children": [
+                {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/DigitalInput[3]/Value",
+                  "_title": "DigitalInput[3]/Value",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
+                },
+                {
+                  "_type": "Speed Controller",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/PWMTalonSRX[2]",
+                  "_title": "PWMTalonSRX[2]",
+                  "Visuals/Orientation": "HORIZONTAL"
+                },
+                {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/DigitalInput[2]/Value",
+                  "_title": "DigitalInput[2]/Value",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
+                }
+              ]
             }
           }
         }
@@ -198,9 +192,9 @@
     }
   ],
   "windowGeometry": {
-    "x": -7.333333492279053,
-    "y": -7.333333492279053,
-    "width": 1294.6666259765625,
-    "height": 694.6666870117188
+    "x": -6.0,
+    "y": 0.6666666865348816,
+    "width": 1292.0,
+    "height": 685.3333129882812
   }
 }

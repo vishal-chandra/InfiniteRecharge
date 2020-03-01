@@ -18,7 +18,7 @@ public class Shooter extends SubsystemBase {
   public SlewRateLimiter shooterRamp;
   public double shootCommand;
 
-  int shooterTolerance = 300; //this is in ticks per 100ms
+  int shooterTolerance = 5500; //this is in ticks per 100ms
 
   public Shooter() {
     shooterTalon = new TalonSRX(kShooterTalonID);

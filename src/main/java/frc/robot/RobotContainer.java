@@ -35,9 +35,9 @@ public class RobotContainer {
   Index index = new Index(intake);
   FeedBall feedBall = new FeedBall(intake);
 
-  private final Command m_autoCommand = new WaitCommand(0);
-
   StartFlywheels startFlywheels = new StartFlywheels(shooter);
+
+  private final Command m_autoCommand = new WaitCommand(0);
 
 
   /**
@@ -58,9 +58,9 @@ public class RobotContainer {
       drive)
     );
 
-    intake.setDefaultCommand(
-      new RunCommand(() -> intake.getTowerState(), intake)
-    );
+    // intake.setDefaultCommand(
+    //   new RunCommand(() -> intake.getTowerState(), intake)
+    // );
   }
 
   /**
@@ -71,11 +71,11 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    new JoystickButton(xbox, Button.kA.value).whenPressed(startFlywheels);
-    new JoystickButton(xbox, Button.kB.value).whenPressed(new InstantCommand(() -> shooter.stopFlywheels()));
+    new JoystickButton(xbox, Button.kStart.value).whenPressed(startFlywheels);
+    new JoystickButton(xbox, Button.kBack.value).whenPressed(new InstantCommand(() -> shooter.stopFlywheels()));
     
     new JoystickButton(xbox, Button.kA.value).whenPressed(intakeBall);
-    new JoystickButton(xbox, Button.kB.value).whenPressed(indexEmpty);
+    new JoystickButton(xbox, Button.kB.value).whenPressed(index);
     new JoystickButton(xbox, Button.kY.value).whenPressed(bringUp);
     new JoystickButton(xbox, Button.kX.value).whenPressed(feedBall);
   }

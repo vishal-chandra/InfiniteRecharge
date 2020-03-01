@@ -50,7 +50,7 @@ public class Intake extends SubsystemBase {
   }
 
   public void runTower() {
-    towerMotor.set(ControlMode.PercentOutput, -0.4);
+    towerMotor.set(ControlMode.PercentOutput, -0.8);
   }
 
   public void stopTower() {

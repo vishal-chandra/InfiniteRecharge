@@ -35,7 +35,7 @@ public final class Constants {
     //Motor Characteristics
     public static int maxDriveRPM = 567;
     public static int maxShooterRPM = 9450;
-    public static double shootPower = 0.4;
+    public static double shootPower = 1.0;
 
     //max throttle change in a second
     public static double kThrottleSlewRate = 1.1;
@@ -46,5 +46,5 @@ public final class Constants {
     //gearing on new robot is 8.46:1
     public static Gains leftDriveGains  = new Gains(0.3053, 0.3, 0, 0); 
     public static Gains rightDriveGains = new Gains(0.3053, 0.3, 0, 0);
-    public static Gains shooterGains    = new Gains(0.0158, 0.4, 0, 0.022);
+    public static Gains shooterGains    = new Gains(0.0158, 0.7, 0, 0.022);
 }

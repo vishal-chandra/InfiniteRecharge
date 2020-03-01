@@ -23,29 +23,28 @@ public class FeedBall extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    lastBoolean = intake.ballAtTowerTop();
+    //lastBoolean = intake.ballAtTowerTop();
     intake.runTower();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(intake.ballAtTowerTop() != lastBoolean) {
-      switchFlipCount++;
-      lastBoolean = intake.ballAtTowerTop();
-    }
+    // if(intake.ballAtTowerTop() != lastBoolean) {
+    //   switchFlipCount++;
+    //   lastBoolean = intake.ballAtTowerTop();
+    // }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     intake.stopTower();
-    switchFlipCount = 0;
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return switchFlipCount == 2;
+    return !intake.ballAtTowerTop();
   }
 }
