@@ -40,6 +40,7 @@ public class FeedBall extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     intake.stopTower();
+    switchFlipCount = 0;
   }
 
   // Returns true when the command should end.
