@@ -5,26 +5,37 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.intake;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.*;
 
-public class IndexEmpty extends CommandBase {
+public class Index extends CommandBase {
   
   Intake intake;
-  public IndexEmpty(Intake intakeSystem) {
+  boolean lastBoolean;
+  int switchFlipCount = 0;
+
+  public Index(Intake intakeSystem) {
     intake = intakeSystem;
+    addRequirements(intake);
   }
 
+  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    lastBoolean = intake.ballAtTowerBottom();
     intake.runTower();
     intake.runIntake();
   }
 
+  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    if(intake.ballAtTowerBottom() != lastBoolean) {
+      switchFlipCount++;
+      lastBoolean = intake.ballAtTowerBottom();
+    }
   }
 
   // Called once the command ends or is interrupted.
@@ -32,11 +43,12 @@ public class IndexEmpty extends CommandBase {
   public void end(boolean interrupted) {
     intake.stopTower();
     intake.stopIntake();
+    switchFlipCount = 0;
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return intake.ballAtTowerBottom();
+    return switchFlipCount == 2;
   }
 }

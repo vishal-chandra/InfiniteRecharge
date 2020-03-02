@@ -9,7 +9,8 @@ import edu.wpi.first.wpilibj2.command.*;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 //3205
-import frc.robot.commands.*;
+import frc.robot.commands.intake.*;
+import frc.robot.commands.shooter.*;
 import frc.robot.subsystems.*;
 import static frc.robot.Constants.*;
 
@@ -34,8 +35,10 @@ public class RobotContainer {
   BringDown bringDown = new BringDown(intake);
   Index index = new Index(intake);
   FeedBall feedBall = new FeedBall(intake);
+  ClearBalls clearBalls = new ClearBalls(intake, shooter);
 
   StartFlywheels startFlywheels = new StartFlywheels(shooter);
+  StopFlywheels stopFlywheels = new StopFlywheels(shooter);
 
   private final Command m_autoCommand = new WaitCommand(0);
 
@@ -71,13 +74,8 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    new JoystickButton(xbox, Button.kStart.value).whenPressed(startFlywheels);
-    new JoystickButton(xbox, Button.kBack.value).whenPressed(new InstantCommand(() -> shooter.stopFlywheels()));
-    
-    new JoystickButton(xbox, Button.kA.value).whenPressed(intakeBall);
-    new JoystickButton(xbox, Button.kB.value).whenPressed(index);
-    new JoystickButton(xbox, Button.kY.value).whenPressed(bringUp);
-    new JoystickButton(xbox, Button.kX.value).whenPressed(feedBall);
+    new JoystickButton(xbox, Button.kA.value).whenPressed(clearBalls);
+    //new JoystickButton(xbox, Button.kB.value).whenPressed(startFlywheels);
   }
 
 

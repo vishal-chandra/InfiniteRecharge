@@ -5,31 +5,22 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.shooter;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.subsystems.*;
 
-public class IntakeBall extends CommandBase {
-  
-  Intake intake;
-  public IntakeBall(Intake intakeSystem) {
-    intake = intakeSystem;
-    addRequirements(intake);
-  }
 
+public class StopFlywheels extends InstantCommand {
+
+  Shooter shooter;
+  public StopFlywheels(Shooter shooterSystem) {
+    shooter = shooterSystem;
+    addRequirements(shooter);
+  }
+  
   @Override
   public void initialize() {
-    intake.runIntake();
-  }
-
-  @Override
-  public void end(boolean interrupted) {
-    intake.stopIntake();
-  }
-
-  @Override
-  public boolean isFinished() {
-    return intake.ballInIntake();
+    shooter.stopFlywheels();
   }
 }

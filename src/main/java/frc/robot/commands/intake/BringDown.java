@@ -5,35 +5,35 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.intake;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.*;
-import static frc.robot.Constants.*;
 
-public class StartFlywheels extends CommandBase {
-  
-  Shooter shooter;
+public class BringDown extends CommandBase {
 
-  public StartFlywheels(Shooter shooterSystem) {
-    shooter = shooterSystem;
+  Intake intake; 
+
+  public BringDown(Intake intakeSystem) {
+    intake = intakeSystem;
+    addRequirements(intake);
   }
 
-
-  // Called every time the scheduler runs while the command is scheduled.
+  // Called when the command is initially scheduled.
   @Override
-  public void execute() {
-    shooter.setFlywheels(shootPower);
+  public void initialize() {
+    intake.reverseTower();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    intake.stopTower();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return shooter.shooterRamp.calculate(shootPower) == shootPower;
+    return intake.getTowerState() == 'B'; 
   }
 }
