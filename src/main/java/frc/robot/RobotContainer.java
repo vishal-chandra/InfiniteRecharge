@@ -58,10 +58,10 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     new JoystickButton(xbox, XboxController.Button.kX.value)
-    .whenPressed(new WinchElevator(winch));
+    .whileHeld(new WinchElevator(winch));
 
     new JoystickButton(xbox, XboxController.Button.kY.value)
-    .whenPressed(new WinchHook(winch));
+    .whileHeld(new WinchHook(winch));
 
   }
 
