@@ -46,16 +46,16 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
 
-    //this block sets up the background driving function
-    //constantly look at the sticks and pass them to drivebase
-    // drive.setDefaultCommand(
-    //   new RunCommand(
-    //   () -> drive.curvatureDrive(
-    //       xbox.getY(Hand.kLeft),
-    //       -xbox.getX(Hand.kRight) //for some reason this needs to be reversed
-    //   ),
-    //   drive)
-    // );
+    // this block sets up the background driving function
+    // constantly look at the sticks and pass them to drivebase
+    drive.setDefaultCommand(
+      new RunCommand(
+      () -> drive.curvatureDrive(
+          xbox.getY(Hand.kLeft),
+          -xbox.getX(Hand.kRight) //for some reason this needs to be reversed
+      ),
+      drive)
+    );
 
     intake.setDefaultCommand(
       new RunCommand(() -> System.out.println(intake.ballCount), intake)
