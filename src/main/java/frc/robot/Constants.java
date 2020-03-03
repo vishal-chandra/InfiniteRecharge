@@ -45,4 +45,7 @@ public final class Constants {
     //gearing on new robot is 8.46:1
     public static Gains leftDriveGains  = new Gains(0.2643, 0, 0, 0); 
     public static Gains rightDriveGains = new Gains(0.2643, 0, 0, 0);
+
+    public static Gains leftPosGains = new Gains(0, 0.07, 0, 0);
+    public static Gains rightPosGains = new Gains(0, 0.07, 0, 0);
 }

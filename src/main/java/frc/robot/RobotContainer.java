@@ -52,14 +52,14 @@ public class RobotContainer {
 
     //this block sets up the background driving function
     //constantly look at the sticks and pass them to drivebase
-    drive.setDefaultCommand(
-      new RunCommand(
-      () -> drive.curvatureDrive(
-          xbox.getY(Hand.kLeft),
-          -xbox.getX(Hand.kRight) //for some reason this needs to be reversed
-      ),
-      drive)
-    );
+    // drive.setDefaultCommand(
+    //   new RunCommand(
+    //   () -> drive.curvatureDrive(
+    //       xbox.getY(Hand.kLeft),
+    //       -xbox.getX(Hand.kRight) //for some reason this needs to be reversed
+    //   ),
+    //   drive)
+    // );
 
     // intake.setDefaultCommand(
     //   new RunCommand(() -> intake.getTowerState(), intake)
@@ -74,8 +74,12 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    new JoystickButton(xbox, Button.kA.value).whenPressed(clearBalls);
-    //new JoystickButton(xbox, Button.kB.value).whenPressed(startFlywheels);
+    new JoystickButton(xbox, Button.kA.value)
+      .whenPressed(new InstantCommand(() -> drive.driveToDist(2)));
+
+      new JoystickButton(xbox, Button.kB.value)
+      .whenPressed(new InstantCommand(() -> drive.driveToDist(-2)));
+    
   }
 
 
