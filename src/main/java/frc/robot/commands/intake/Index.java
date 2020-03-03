@@ -49,6 +49,7 @@ public class Index extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return switchFlipCount == 2;
+    if(intake.ballAtTowerTop()) return true;
+    else return switchFlipCount == 2;
   }
 }

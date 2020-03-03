@@ -5,22 +5,22 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.shooter;
+package frc.robot.commands.intake;
 
-import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.shooter.RunFlywheels;
+import frc.robot.commands.intake.BringUp;
+import frc.robot.commands.intake.FeedBall;
 import frc.robot.subsystems.*;
 
 
-public class StartFlywheels extends InstantCommand {
-
-  Shooter shooter;
-  public StartFlywheels(Shooter shooterSystem) {
-    shooter = shooterSystem;
-    addRequirements(shooter);
-  }
+public class ShootBall extends SequentialCommandGroup {
   
-  @Override
-  public void initialize() {
-    shooter.startFlywheels();
+  public ShootBall(Shooter shooter, Intake intake) {
+    super(
+      new BringUp(intake),
+      new RunFlywheels(shooter),
+      new FeedBall(intake)
+    );
   }
 }

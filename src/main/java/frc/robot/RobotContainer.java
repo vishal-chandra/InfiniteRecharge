@@ -30,15 +30,11 @@ public class RobotContainer {
   public final Intake intake = new Intake();
 
   IntakeBall intakeBall = new IntakeBall(intake);
-  IndexEmpty indexEmpty = new IndexEmpty(intake);
-  BringUp bringUp = new BringUp(intake);
-  BringDown bringDown = new BringDown(intake);
   Index index = new Index(intake);
-  FeedBall feedBall = new FeedBall(intake);
-  ClearBalls clearBalls = new ClearBalls(intake, shooter);
+  BringUp bringUp = new BringUp(intake);
 
-  StartFlywheels startFlywheels = new StartFlywheels(shooter);
-  StopFlywheels stopFlywheels = new StopFlywheels(shooter);
+  ShootOne shootOne = new ShootOne(shooter, intake);
+  ShootAll shootAll = new ShootAll(shooter, intake);
 
   private final Command m_autoCommand = new WaitCommand(0);
 
@@ -61,9 +57,9 @@ public class RobotContainer {
     //   drive)
     // );
 
-    // intake.setDefaultCommand(
-    //   new RunCommand(() -> intake.getTowerState(), intake)
-    // );
+    intake.setDefaultCommand(
+      new RunCommand(() -> System.out.println(intake.ballCount), intake)
+    );
   }
 
   /**
@@ -75,11 +71,22 @@ public class RobotContainer {
   private void configureButtonBindings() {
 
     new JoystickButton(xbox, Button.kA.value)
-      .whenPressed(new InstantCommand(() -> drive.driveToDist(2)));
+      .whenPressed(intakeBall);
 
-      new JoystickButton(xbox, Button.kB.value)
-      .whenPressed(new InstantCommand(() -> drive.driveToDist(-2)));
-    
+    new JoystickButton(xbox, Button.kB.value)
+      .whenPressed(index);
+
+    new JoystickButton(xbox, Button.kY.value)
+      .whenPressed(shootOne);
+
+    new JoystickButton(xbox, Button.kX.value)
+      .whenPressed(bringUp);
+
+    new JoystickButton(xbox, Button.kStart.value)
+      .whenPressed(shootAll);
+
+    new JoystickButton(xbox, Button.kBack.value)
+      .whenPressed(new InstantCommand(() -> shooter.stopFlywheels()));
   }
 
 

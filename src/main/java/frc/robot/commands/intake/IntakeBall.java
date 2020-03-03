@@ -30,6 +30,10 @@ public class IntakeBall extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return intake.ballInIntake();
+    if(intake.ballInIntake()) {
+      intake.ballCount++;
+      return true;
+    }
+    else return false;
   }
 }

@@ -24,6 +24,7 @@ public class Intake extends SubsystemBase {
   PWMTalonSRX intakeMotor;
 
   char towerState = ' ';
+  public int ballCount = 0; 
 
   public Intake() {
 

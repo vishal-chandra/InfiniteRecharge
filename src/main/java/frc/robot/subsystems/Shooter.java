@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -14,6 +15,8 @@ public class Shooter extends SubsystemBase {
   public Shooter() {
     shooterTalon = new TalonSRX(kShooterTalonID);
     shooterTalon.configFactoryDefault();
+    shooterTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, kTimeoutMs);
+    shooterTalon.setSensorPhase(true);
 
     shooterFollower = new TalonSRX(kShooterFollowerID);
     shooterFollower.configFactoryDefault();
@@ -26,6 +29,10 @@ public class Shooter extends SubsystemBase {
   }
 
   public void startFlywheels() {
-    shooterTalon.set(ControlMode.PercentOutput, 1.0);
+    shooterTalon.set(ControlMode.PercentOutput, 0.9);
+  }
+
+  public double getRPM() {
+    return shooterTalon.getSelectedSensorVelocity();
   }
 }
