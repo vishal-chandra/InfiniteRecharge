@@ -26,8 +26,8 @@ public class RobotContainer {
   XboxController xbox = new XboxController(kXboxPort);
 
   // The robot's subsystems and commands are defined here...
-  private final Drive drive = new Drive();
-  private final ColorWheel colorWheel = new ColorWheel();
+  public final Drive drive = new Drive();
+  public final ColorWheel colorWheel = new ColorWheel();
 
   private final Command m_autoCommand = new WaitCommand(0);
 
@@ -44,7 +44,7 @@ public class RobotContainer {
     drive.setDefaultCommand(
       new RunCommand(
       () -> drive.curvatureDrive(
-          xbox.getY(Hand.kLeft), 
+          xbox.getY(Hand.kLeft),
           -xbox.getX(Hand.kRight) //for some reason this needs to be reversed
       ),
       drive)

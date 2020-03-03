@@ -2,6 +2,8 @@ package frc.robot.subsystems;
 
 //WPI
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.SlewRateLimiter;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 //CTRE
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -15,7 +17,10 @@ import static frc.robot.Constants.*;
 public class Drive extends SubsystemBase {
   
   TalonSRX leftTalon, rightTalon;
-  VictorSPX leftVictor, rightVictor;
+  TalonSRX rightFollower;
+  VictorSPX leftFollower;
+
+  SlewRateLimiter throttleRamp, turnRamp;
 
   /**
    * Constructor
@@ -31,14 +36,14 @@ public class Drive extends SubsystemBase {
     leftTalon = new TalonSRX(kLeftTalonID);
     leftTalon.configFactoryDefault();
 
-    leftVictor = new VictorSPX(kLeftVictorID);
-    leftVictor.configFactoryDefault();
+    leftFollower = new VictorSPX(kLeftFollowerID);
+    leftFollower.configFactoryDefault();
 
     rightTalon = new TalonSRX(kRightTalonID);
     rightTalon.configFactoryDefault();
 
-    rightVictor = new VictorSPX(kRightVictorID);
-    rightVictor.configFactoryDefault();
+    rightFollower = new TalonSRX(kRightFollowerID);
+    rightFollower.configFactoryDefault();
 
     /**
      * LEFT DRIVE PID SETUP ------------------------------------------------------------------------
@@ -47,7 +52,7 @@ public class Drive extends SubsystemBase {
     leftTalon.setSensorPhase(true);
 
     leftTalon.setInverted(true); //make it spin the right way
-    leftVictor.setInverted(InvertType.FollowMaster); //make the follower spin the same way
+    leftFollower.setInverted(InvertType.FollowMaster); //make the follower spin the same way
 
 
     //minimum percent output
@@ -64,16 +69,13 @@ public class Drive extends SubsystemBase {
     leftTalon.config_kI(0, leftDriveGains.kI, kTimeoutMs);
     leftTalon.config_kD(0, leftDriveGains.kD, kTimeoutMs);
 
-    //ramp (this won't work because it ramps turns too)
-    //leftTalon.configClosedloopRamp(kRampDuration, kTimeoutMs);
-
-    leftVictor.follow(leftTalon);
+    leftFollower.follow(leftTalon);
 
     /**
      * RIGHT DRIVE PID SETUP -----------------------------------------------------------------------
      */
     rightTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, kTimeoutMs);
-    rightTalon.setSensorPhase(false); 
+    rightTalon.setSensorPhase(true); 
 
     //minimum percent output
     rightTalon.configNominalOutputForward(0, kTimeoutMs);
@@ -89,10 +91,11 @@ public class Drive extends SubsystemBase {
     rightTalon.config_kI(0, rightDriveGains.kI, kTimeoutMs);
     rightTalon.config_kD(0, rightDriveGains.kD, kTimeoutMs);
 
-    //ramp (this won't work because it ramps the turns too)
-    //rightTalon.configClosedloopRamp(kRampDuration, kTimeoutMs);
-
-    rightVictor.follow(rightTalon);
+    rightFollower.follow(rightTalon);
+    
+    //Ramp init 
+    throttleRamp = new SlewRateLimiter(kThrottleSlewRate);
+    turnRamp = new SlewRateLimiter(kTurnSlewRate);
   }
 
   /**
@@ -105,19 +108,16 @@ public class Drive extends SubsystemBase {
    */
   public void curvatureDrive(double power, double turn) {
 
-    //adjust joystick inputs
-    double curvedPower = curve(power);
-    double curvedTurn  = curve(turn);
+    //adjust inputs
+    double curvedPower = throttleRamp.calculate(curve(power));
+    double curvedTurn  = turnRamp.calculate(curve(turn));
 
     //a positive turn command should speed up the left side
-    //and a negative turn command should slow down the left side
     double leftCommand  = curvedPower + curvedTurn;
-
-    //a positive turn command should slow down the right side
-    //and a negative turn command should speed up the right side
+    //a negative turn command should speed up the right side
     double rightCommand = curvedPower - curvedTurn;
 
-    //if a command is outside the domain [-1.0, 1]
+    //if a command is outside the domain [-1.0, 1.0]
     //bring that command down/up to +-1.0 and bring
     //the other command down/up by the same amount
     if(leftCommand > 1.0) {
@@ -177,6 +177,17 @@ public class Drive extends SubsystemBase {
     //then convert revolutions to units
     //and minutes to 100ms
     return command * maxDriveRPM * 4096 / 600;
+  }
+
+  public void updateShuffleboard() {
+    SmartDashboard.putNumber("leftDriveError", leftTalon.getClosedLoopError());
+    SmartDashboard.putNumber("rightDriveError", rightTalon.getClosedLoopError());
+
+    SmartDashboard.putNumber("leftVel", leftTalon.getSelectedSensorVelocity());
+    SmartDashboard.putNumber("rightVel", rightTalon.getSelectedSensorVelocity());
+
+    SmartDashboard.putNumber("leftTarget", leftTalon.getClosedLoopTarget());
+    SmartDashboard.putNumber("rightTarget", rightTalon.getClosedLoopTarget());
   }
 
 }
