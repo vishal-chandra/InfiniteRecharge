@@ -30,7 +30,7 @@ public final class Constants {
     //Drive Characteristics 
     public static int maxDriveRPM = 567;
     //max throttle change in a second
-    public static double kThrottleSlewRate = 1.1;
+    public static double kThrottleSlewRate = 1.3;
     public static double kTurnSlewRate = 0.9;
     public static double kFlywheelRatio = 1 / 8;
 

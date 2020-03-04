@@ -45,7 +45,8 @@ public class RobotContainer {
       new RunCommand(
       () -> drive.curvatureDrive(
           xbox.getY(Hand.kLeft),
-          -xbox.getX(Hand.kRight) //for some reason this needs to be reversed
+          -xbox.getX(Hand.kRight),//for some reason this needs to be reversed
+          colorWheel.getSwitch()
       ),
       drive)
     );
