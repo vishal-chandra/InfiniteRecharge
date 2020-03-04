@@ -151,8 +151,8 @@ public class Drive extends SubsystemBase {
         rightTalon.set(ControlMode.Velocity, rightCommand);
       }
       else {
-        leftTalon.set(ControlMode.Velocity, 0);
-        rightTalon.set(ControlMode.Velocity, 0);
+        leftTalon.set(ControlMode.Velocity, commandToTargetVelocity(0.05));
+        rightTalon.set(ControlMode.Velocity, commandToTargetVelocity(0.05));
       }
     }
     else {
