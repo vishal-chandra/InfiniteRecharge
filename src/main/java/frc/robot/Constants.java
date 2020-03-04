@@ -18,6 +18,7 @@ public final class Constants {
     public static int kIntakeSwitchPort = 1;
     public static int kTowerTopSwitchPort  = 2;
     public static int kTowerBottomSwitchPort = 3;
+    public static int kIntakePhotoPort = 2; //analog
 
     //Motor Controller CAN IDs
     public static int kShooterTalonID = 8;

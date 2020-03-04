@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.PWMTalonSRX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -20,6 +21,7 @@ import static frc.robot.Constants.*;
 public class Intake extends SubsystemBase {
   
   DigitalInput intakeSwitch, towerBottomSwitch, towerTopSwitch;
+  public AnalogInput intakePhotoResistor;
   TalonSRX towerMotor;
   PWMTalonSRX intakeMotor;
 
@@ -36,9 +38,9 @@ public class Intake extends SubsystemBase {
 
     //switch setup
     intakeSwitch = new DigitalInput(kIntakeSwitchPort);
+    intakePhotoResistor = new AnalogInput(kIntakePhotoPort);
     towerBottomSwitch = new DigitalInput(kTowerBottomSwitchPort);
     towerTopSwitch = new DigitalInput(kTowerTopSwitchPort);
-
   }
 
   /*Motor Methods*/
@@ -64,7 +66,13 @@ public class Intake extends SubsystemBase {
 
   /*Switch Methods*/
   public boolean ballInIntake() {
-    return !intakeSwitch.get();
+    //return !intakeSwitch.get();
+    double vMeas = intakePhotoResistor.getVoltage();
+    
+    if(vMeas < 2.5)
+      return true;
+    return false;
+
   }
 
   public boolean ballAtTowerBottom() {

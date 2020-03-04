@@ -28,6 +28,7 @@ public class RobotContainer {
   public final Drive drive = new Drive();
   public final Shooter shooter = new Shooter();
   public final Intake intake = new Intake();
+  public final Vision vision = new Vision(); 
 
   IntakeBall intakeBall = new IntakeBall(intake);
   Index index = new Index(intake);
@@ -58,7 +59,7 @@ public class RobotContainer {
     );
 
     intake.setDefaultCommand(
-      new RunCommand(() -> System.out.println(intake.ballCount), intake)
+      new RunCommand(() -> System.out.println(intake.intakePhotoResistor.getVoltage()), intake)
     );
   }
 
