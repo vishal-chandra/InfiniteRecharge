@@ -67,12 +67,6 @@ public class Intake extends SubsystemBase {
   /*Switch Methods*/
   public boolean ballInIntake() {
     return !intakeSwitch.get();
-    // double vMeas = intakePhotoResistor.getVoltage();
-    
-    // if(vMeas < 2.5)
-    //   return true;
-    // return false;
-
   }
 
   public boolean ballAtTowerBottom() {
@@ -125,5 +119,5 @@ public class Intake extends SubsystemBase {
     SmartDashboard.putBoolean("towerBottomSwitch", ballAtTowerBottom());
     SmartDashboard.putBoolean("towerTopSwitch", ballAtTowerTop());
   }
-  
+
 }
