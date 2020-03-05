@@ -66,12 +66,12 @@ public class Intake extends SubsystemBase {
 
   /*Switch Methods*/
   public boolean ballInIntake() {
-    //return !intakeSwitch.get();
-    double vMeas = intakePhotoResistor.getVoltage();
+    return !intakeSwitch.get();
+    // double vMeas = intakePhotoResistor.getVoltage();
     
-    if(vMeas < 2.5)
-      return true;
-    return false;
+    // if(vMeas < 2.5)
+    //   return true;
+    // return false;
 
   }
 

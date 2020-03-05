@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 //3205
 import frc.robot.commands.intake.*;
 import frc.robot.commands.shooter.*;
+import frc.robot.commands.auto.*;
 import frc.robot.subsystems.*;
 import static frc.robot.Constants.*;
 
@@ -37,6 +38,8 @@ public class RobotContainer {
   ShootOne shootOne = new ShootOne(shooter, intake);
   ShootAll shootAll = new ShootAll(shooter, intake);
 
+  AutoCommand auto = new AutoCommand(drive, intake, shooter);
+
   private final Command m_autoCommand = new WaitCommand(0);
 
 
@@ -49,18 +52,18 @@ public class RobotContainer {
 
     // this block sets up the background driving function
     // constantly look at the sticks and pass them to drivebase
-    drive.setDefaultCommand(
-      new RunCommand(
-      () -> drive.curvatureDrive(
-          xbox.getY(Hand.kLeft),
-          -xbox.getX(Hand.kRight) //for some reason this needs to be reversed
-      ),
-      drive)
-    );
+    // drive.setDefaultCommand(
+    //   new RunCommand(
+    //   () -> drive.curvatureDrive(
+    //       xbox.getY(Hand.kLeft),
+    //       -xbox.getX(Hand.kRight) //for some reason this needs to be 
+    //   ),
+    //   drive)
+    // );
 
-    intake.setDefaultCommand(
-      new RunCommand(() -> System.out.println(intake.intakePhotoResistor.getVoltage()), intake)
-    );
+    // intake.setDefaultCommand(
+    //   new RunCommand(() -> System.out.println(intake.intakePhotoResistor.getVoltage()), intake)
+    // );
   }
 
   /**
@@ -87,7 +90,7 @@ public class RobotContainer {
       .whenPressed(shootAll);
 
     new JoystickButton(xbox, Button.kBack.value)
-      .whenPressed(new InstantCommand(() -> shooter.stopFlywheels()));
+      .whenPressed(auto);
   }
 
 
