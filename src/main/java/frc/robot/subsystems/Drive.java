@@ -13,6 +13,12 @@ import com.ctre.phoenix.motorcontrol.*;
 //3205
 import static frc.robot.Constants.*;
 
+//LIDAR
+import java.nio.ByteBuffer;
+import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.I2C.Port;
+import edu.wpi.first.hal.I2CJNI;
+
 
 public class Drive extends SubsystemBase {
   
@@ -22,6 +28,11 @@ public class Drive extends SubsystemBase {
 
   SlewRateLimiter throttleRamp, turnRamp;
 
+  //LIDAR variables
+  private static final byte k_deviceAddress = 0x62; //default I2C address
+  private final byte m_port;
+  private final ByteBuffer m_buffer = ByteBuffer.allocateDirect(2); //ByteBuffer converts byte to char
+
   /**
    * Constructor
    * 
@@ -29,6 +40,10 @@ public class Drive extends SubsystemBase {
    * left and right PID Loops
    */
   public Drive() {
+
+    //LIDAR CREATION
+    m_port = (byte) I2C.Port.kOnboard.value;
+    I2CJNI.i2CInitialize(m_port);
 
     /**
      * Controller Setup
@@ -108,6 +123,9 @@ public class Drive extends SubsystemBase {
    */
   public void curvatureDrive(double power, double turn) {
 
+    //call the LIDAR methods (continuous)
+    displayLIDARdata();
+
     //adjust inputs
     double curvedPower = throttleRamp.calculate(curve(power));
     double curvedTurn  = turnRamp.calculate(curve(turn));
@@ -185,4 +203,52 @@ public class Drive extends SubsystemBase {
     SmartDashboard.putNumber("rightTarget", rightTalon.getClosedLoopTarget());
   }
 
+  public void displayLIDARdata() {
+    startMeasuring();
+    short displayedShort = readShort(0x8f); //distance in centimeters
+    double LIDARdistance = displayedShort / 2.54 / 12; //convert from centimeters to feet
+
+    SmartDashboard.putNumber("LIDAR distance", LIDARdistance);
+  }
+
+  /**
+   * Starts LIDAR measuring.
+   */
+  public void startMeasuring() {
+    writeRegister(0x04, 0x08); //starts measuring with aquisition mode control
+    writeRegister(0x11, 0xff); //the number of times the device will retrigger, set to free-run
+    writeRegister(0x00, 0x04); //enable reciever bias correction
+  }
+
+  /*
+  HELPER METHODS
+  */
+
+  /**
+   * Called by the startMeasuring method above to adjust the values/set up the machine.
+   * 
+   * @param address The type of control/task?
+   * @param value The input to the address.
+   * @return ??
+   */
+  private int writeRegister(int address, int value) {
+    m_buffer.put(0, (byte) address); //0 and 1 are index values for ByteBuffer
+    m_buffer.put(1, (byte) value);
+
+    return I2CJNI.i2CWrite(m_port, k_deviceAddress, m_buffer, (byte) 2);
+  }
+
+  /**
+   * Called by the displayLIDARdata method above to get the distance.
+   * 
+   * @param address The type of control/task?
+   * @return Distance in centimeters (stored in a 16-bit short).
+   */
+  private short readShort(int address) {
+    m_buffer.put(0, (byte) address);
+    I2CJNI.i2CWrite(m_port, k_deviceAddress, m_buffer, (byte) 1);
+    I2CJNI.i2CRead(m_port, k_deviceAddress, m_buffer, (byte) 2);
+
+    return m_buffer.getShort(0);
+  }
 }
