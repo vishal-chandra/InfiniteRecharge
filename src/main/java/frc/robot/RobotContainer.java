@@ -38,9 +38,7 @@ public class RobotContainer {
   ShootOne shootOne = new ShootOne(shooter, intake);
   ShootAll shootAll = new ShootAll(shooter, intake);
 
-  AutoCommand auto = new AutoCommand(drive, intake, shooter);
-
-  private final Command m_autoCommand = new WaitCommand(0);
+  private final AutoCommand m_autoCommand = new AutoCommand(drive, intake, shooter);
 
 
   /**
@@ -86,8 +84,6 @@ public class RobotContainer {
     new JoystickButton(xbox, Button.kStart.value)
       .whenPressed(shootAll);
 
-    new JoystickButton(xbox, Button.kBack.value)
-      .whenPressed(auto);
   }
 
 
