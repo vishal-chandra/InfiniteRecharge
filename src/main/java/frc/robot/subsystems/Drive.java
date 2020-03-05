@@ -2,6 +2,8 @@ package frc.robot.subsystems;
 
 //WPI
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.MedianFilter;
 import edu.wpi.first.wpilibj.SlewRateLimiter;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -19,6 +21,9 @@ public class Drive extends SubsystemBase {
   TalonSRX leftTalon, rightTalon;
   TalonSRX rightFollower;
   VictorSPX leftFollower;
+
+  AnalogInput ultrasonic;
+  MedianFilter ultraFilter;
 
   SlewRateLimiter throttleRamp, turnRamp;
 
@@ -49,6 +54,7 @@ public class Drive extends SubsystemBase {
      * LEFT DRIVE PID SETUP ------------------------------------------------------------------------
      */
     leftTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, kTimeoutMs);
+    leftTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 1, kTimeoutMs);
     leftTalon.setSensorPhase(true);
 
     leftTalon.setInverted(true); //make it spin the right way
@@ -64,10 +70,16 @@ public class Drive extends SubsystemBase {
     leftTalon.configPeakOutputReverse(-1, kTimeoutMs);
 
     //gains
+    //vel
     leftTalon.config_kF(0, leftDriveGains.kF, kTimeoutMs);
     leftTalon.config_kP(0, leftDriveGains.kP, kTimeoutMs);
     leftTalon.config_kI(0, leftDriveGains.kI, kTimeoutMs);
     leftTalon.config_kD(0, leftDriveGains.kD, kTimeoutMs);
+    //pos
+    leftTalon.config_kF(1, leftPosGains.kF, kTimeoutMs);
+    leftTalon.config_kP(1, leftPosGains.kP, kTimeoutMs);
+    leftTalon.config_kI(1, leftPosGains.kI, kTimeoutMs);
+    leftTalon.config_kD(1, leftPosGains.kD, kTimeoutMs);
 
     leftFollower.follow(leftTalon);
 
@@ -75,6 +87,7 @@ public class Drive extends SubsystemBase {
      * RIGHT DRIVE PID SETUP -----------------------------------------------------------------------
      */
     rightTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, kTimeoutMs);
+    rightTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 1, kTimeoutMs);
     rightTalon.setSensorPhase(true); 
 
     //minimum percent output
@@ -86,16 +99,26 @@ public class Drive extends SubsystemBase {
     rightTalon.configPeakOutputReverse(-1, kTimeoutMs);
 
     //gains
+    //vel
     rightTalon.config_kF(0, rightDriveGains.kF, kTimeoutMs);
     rightTalon.config_kP(0, rightDriveGains.kP, kTimeoutMs);
     rightTalon.config_kI(0, rightDriveGains.kI, kTimeoutMs);
     rightTalon.config_kD(0, rightDriveGains.kD, kTimeoutMs);
+    //pos
+    rightTalon.config_kF(1, rightPosGains.kF, kTimeoutMs);
+    rightTalon.config_kP(1, rightPosGains.kP, kTimeoutMs);
+    rightTalon.config_kI(1, rightPosGains.kI, kTimeoutMs);
+    rightTalon.config_kD(1, rightPosGains.kD, kTimeoutMs);
 
     rightFollower.follow(rightTalon);
     
     //Ramp init 
     throttleRamp = new SlewRateLimiter(kThrottleSlewRate);
     turnRamp = new SlewRateLimiter(kTurnSlewRate);
+
+    //ultrasonic
+    ultrasonic = new AnalogInput(0);
+    ultraFilter = new MedianFilter(50);
   }
 
   /**
@@ -160,6 +183,31 @@ public class Drive extends SubsystemBase {
       rightTalon.set(ControlMode.Velocity, rightCommand);
     }
   }
+
+  public void driveToDist(double dist) {
+    double rotations = dist / (Math.PI * 0.5);
+    double rotationsInTicks = rotations * 4096;
+
+    leftTalon.setSelectedSensorPosition(0);
+    rightTalon.setSelectedSensorPosition(0);
+
+    leftTalon.selectProfileSlot(1, 0);
+    rightTalon.selectProfileSlot(1, 0);
+
+    leftTalon.set(ControlMode.Position, rotationsInTicks);
+    rightTalon.set(ControlMode.Position, rotationsInTicks);
+  }
+
+  public void getUltra() {
+    double voltageReading = ultraFilter.calculate(ultrasonic.getVoltage());
+    double voltsPerMM = 5.0 / 5120;
+
+    double rangeMM = voltageReading / voltsPerMM;
+    double rangeFt = rangeMM / 304.8;
+
+    System.out.println(rangeFt);
+  }
+
 
   /**
    * f(x) = x|x|

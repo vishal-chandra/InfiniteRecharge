@@ -3,16 +3,15 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
-import frc.robot.commands.colorwheel.ColorControl;
-import frc.robot.commands.colorwheel.RotationControl;
-import frc.robot.subsystems.*;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.RunCommand;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
+import edu.wpi.first.wpilibj2.command.*;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj.XboxController.Button;
 
 //3205
-//import frc.robot.commands.*;
+import frc.robot.commands.intake.*;
+import frc.robot.commands.shooter.*;
+import frc.robot.commands.auto.*;
+import frc.robot.subsystems.*;
 import static frc.robot.Constants.*;
 
 /**
@@ -28,6 +27,18 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   public final Drive drive = new Drive();
   public final ColorWheel colorWheel = new ColorWheel();
+  public final Shooter shooter = new Shooter();
+  public final Intake intake = new Intake();
+  public final Vision vision = new Vision(); 
+
+  IntakeBall intakeBall = new IntakeBall(intake);
+  Index index = new Index(intake);
+  BringUp bringUp = new BringUp(intake);
+
+  ShootOne shootOne = new ShootOne(shooter, intake);
+  ShootAll shootAll = new ShootAll(shooter, intake);
+
+  AutoCommand auto = new AutoCommand(drive, intake, shooter);
 
   private final Command m_autoCommand = new WaitCommand(0);
 
@@ -50,7 +61,6 @@ public class RobotContainer {
       ),
       drive)
     );
-
   }
 
   /**
@@ -61,14 +71,23 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    //color control
-    new JoystickButton(xbox, XboxController.Button.kA.value)
-      .whenPressed(new ColorControl(colorWheel));
+    new JoystickButton(xbox, Button.kA.value)
+      .whenPressed(intakeBall);
 
-    //rotation control
-    new JoystickButton(xbox, XboxController.Button.kB.value)
-      .whenPressed(new RotationControl(colorWheel));
-    
+    new JoystickButton(xbox, Button.kB.value)
+      .whenPressed(index);
+
+    new JoystickButton(xbox, Button.kY.value)
+      .whenPressed(shootOne);
+
+    new JoystickButton(xbox, Button.kX.value)
+      .whenPressed(bringUp);
+
+    new JoystickButton(xbox, Button.kStart.value)
+      .whenPressed(shootAll);
+
+    new JoystickButton(xbox, Button.kBack.value)
+      .whenPressed(auto);
   }
 
 

@@ -10,70 +10,27 @@
         "hgap": 16.0,
         "vgap": 16.0,
         "tiles": {
-          "4,0": {
-            "size": [
-              3,
-              3
-            ],
-            "content": {
-              "_type": "Graph",
-              "_source0": "network_table:///driveMonitor/rightErr",
-              "_title": "driveMonitor/rightErr",
-              "Graph/Visible time": 30.0,
-              "Y-axis/Automatic bounds": true,
-              "Y-axis/Upper bound": 1.0,
-              "Y-axis/Lower bound": -1.0
-            }
-          },
           "1,0": {
             "size": [
-              3,
+              5,
               3
             ],
             "content": {
               "_type": "Graph",
-              "_source0": "network_table:///driveMonitor/leftErr",
-              "_title": "driveMonitor/leftErr",
+              "_source0": "network_table:///SmartDashboard/shooterCommand",
+              "_source1": "network_table:///SmartDashboard/shooterVel",
+              "_source2": "network_table:///SmartDashboard/shooterError",
+              "_title": "SmartDashboard/shooterVel",
               "Graph/Visible time": 30.0,
               "Y-axis/Automatic bounds": true,
               "Y-axis/Upper bound": 1.0,
-              "Y-axis/Lower bound": -1.0
+              "Y-axis/Lower bound": -1.0,
+              "Visible data/SmartDashboard/shooterCommand": false,
+              "Visible data/SmartDashboard/shooterError": false,
+              "Visible data/SmartDashboard/shooterVel": false
             }
           },
           "0,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/leftDriveError",
-              "_title": "leftDriveError"
-            }
-          },
-          "0,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/leftVel",
-              "_title": "leftVel"
-            }
-          },
-          "0,2": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/leftTarget",
-              "_title": "leftTarget"
-            }
-          },
-          "7,0": {
             "size": [
               1,
               1
@@ -84,7 +41,7 @@
               "_title": "Limelight_PipelineName"
             }
           },
-          "7,1": {
+          "6,0": {
             "size": [
               1,
               1
@@ -95,7 +52,7 @@
               "_title": "Limelight_Stream"
             }
           },
-          "7,2": {
+          "7,0": {
             "size": [
               1,
               1
@@ -104,6 +61,45 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Limelight_Interface",
               "_title": "Limelight_Interface"
+            }
+          },
+          "0,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/intakeSwitch",
+              "_title": "intakeSwitch",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "6,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/towerBottomSwitch",
+              "_title": "towerBottomSwitch",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "7,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/towerTopSwitch",
+              "_title": "towerTopSwitch",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
             }
           }
         }
@@ -118,14 +114,87 @@
         "showGrid": true,
         "hgap": 16.0,
         "vgap": 16.0,
-        "tiles": {}
+        "tiles": {
+          "0,0": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Speed Controller",
+              "_source0": "network_table:///LiveWindow/Ungrouped/PWMVictorSPX[2]",
+              "_title": "Ungrouped/PWMVictorSPX[2]",
+              "Visuals/Orientation": "HORIZONTAL"
+            }
+          },
+          "2,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///LiveWindow/Ungrouped/DigitalInput[1]/Value",
+              "_title": "Ungrouped/DigitalInput[1]/Value",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "3,0": {
+            "size": [
+              2,
+              4
+            ],
+            "content": {
+              "_type": "Subsystem Layout",
+              "_source0": "network_table:///LiveWindow/Shooter",
+              "_title": "Shooter",
+              "Layout/Label position": "BOTTOM",
+              "_children": []
+            }
+          },
+          "5,0": {
+            "size": [
+              2,
+              4
+            ],
+            "content": {
+              "_type": "Subsystem Layout",
+              "_source0": "network_table:///LiveWindow/Ungrouped",
+              "_title": "Ungrouped",
+              "Layout/Label position": "BOTTOM",
+              "_children": [
+                {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/DigitalInput[3]/Value",
+                  "_title": "DigitalInput[3]/Value",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
+                },
+                {
+                  "_type": "Speed Controller",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/PWMTalonSRX[2]",
+                  "_title": "PWMTalonSRX[2]",
+                  "Visuals/Orientation": "HORIZONTAL"
+                },
+                {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/DigitalInput[2]/Value",
+                  "_title": "DigitalInput[2]/Value",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
+                }
+              ]
+            }
+          }
+        }
       }
     }
   ],
   "windowGeometry": {
-    "x": 0.0,
-    "y": 0.0,
-    "width": 1280.0,
-    "height": 680.0
+    "x": -6.0,
+    "y": 0.6666666865348816,
+    "width": 1292.0,
+    "height": 685.3333129882812
   }
 }
