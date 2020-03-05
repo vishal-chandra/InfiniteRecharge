@@ -11,8 +11,8 @@ public class ShootAll extends SequentialCommandGroup {
   public ShootAll(Shooter shooter, Intake intake) {
     super(
       new ShootBall(shooter, intake),
-      new ShootBall(shooter, intake),
       new Index(intake),
+      new ShootBall(shooter, intake),
       new ShootBall(shooter, intake),
       new InstantCommand(() -> shooter.stopFlywheels()),
       new InstantCommand(() -> intake.stopIntake(), intake),
