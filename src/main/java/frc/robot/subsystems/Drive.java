@@ -27,6 +27,8 @@ public class Drive extends SubsystemBase {
 
   SlewRateLimiter throttleRamp, turnRamp;
 
+  public boolean posMode;
+
   /**
    * Constructor
    * 
@@ -119,6 +121,8 @@ public class Drive extends SubsystemBase {
     //ultrasonic
     ultrasonic = new AnalogInput(0);
     ultraFilter = new MedianFilter(50);
+
+    posMode = false;
   }
 
   /**
@@ -168,19 +172,21 @@ public class Drive extends SubsystemBase {
     rightCommand = commandToTargetVelocity(rightCommand);
 
     //send commands
-    if(!allowed) {
-      if(leftCommand > 0 && rightCommand > 0) {
+    if(!posMode) {
+      if(!allowed) {
+        if(leftCommand > 0 && rightCommand > 0) {
+          leftTalon.set(ControlMode.Velocity, leftCommand);
+          rightTalon.set(ControlMode.Velocity, rightCommand);
+        }
+        else {
+          leftTalon.set(ControlMode.Velocity, commandToTargetVelocity(0.05));
+          rightTalon.set(ControlMode.Velocity, commandToTargetVelocity(0.05));
+        }
+      }
+      else {
         leftTalon.set(ControlMode.Velocity, leftCommand);
         rightTalon.set(ControlMode.Velocity, rightCommand);
       }
-      else {
-        leftTalon.set(ControlMode.Velocity, commandToTargetVelocity(0.05));
-        rightTalon.set(ControlMode.Velocity, commandToTargetVelocity(0.05));
-      }
-    }
-    else {
-      leftTalon.set(ControlMode.Velocity, leftCommand);
-      rightTalon.set(ControlMode.Velocity, rightCommand);
     }
   }
 

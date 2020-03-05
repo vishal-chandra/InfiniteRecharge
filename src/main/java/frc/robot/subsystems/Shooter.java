@@ -29,7 +29,7 @@ public class Shooter extends SubsystemBase {
   }
 
   public void startFlywheels() {
-    shooterTalon.set(ControlMode.PercentOutput, 0.9);
+    shooterTalon.set(ControlMode.PercentOutput, 0.85);
   }
 
   public double getRPM() {

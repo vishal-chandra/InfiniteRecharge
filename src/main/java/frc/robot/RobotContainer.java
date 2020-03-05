@@ -1,6 +1,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj2.command.*;
@@ -11,6 +12,8 @@ import edu.wpi.first.wpilibj.XboxController.Button;
 import frc.robot.commands.intake.*;
 import frc.robot.commands.shooter.*;
 import frc.robot.commands.auto.*;
+import frc.robot.commands.colorwheel.ColorControl;
+import frc.robot.commands.colorwheel.RotationControl;
 import frc.robot.subsystems.*;
 import static frc.robot.Constants.*;
 
@@ -23,6 +26,7 @@ import static frc.robot.Constants.*;
 public class RobotContainer {
 
   XboxController xbox = new XboxController(kXboxPort);
+  Joystick monkey = new Joystick(kMonkeyPort);
 
   // The robot's subsystems and commands are defined here...
   public final Drive drive = new Drive();
@@ -33,7 +37,9 @@ public class RobotContainer {
 
   IntakeBall intakeBall = new IntakeBall(intake);
   Index index = new Index(intake);
-  BringUp bringUp = new BringUp(intake);
+
+  RotationControl rotationControl = new RotationControl(colorWheel);
+  ColorControl colorControl = new ColorControl(colorWheel);
 
   ShootOne shootOne = new ShootOne(shooter, intake);
   ShootAll shootAll = new ShootAll(shooter, intake);
@@ -72,17 +78,20 @@ public class RobotContainer {
     new JoystickButton(xbox, Button.kA.value)
       .whenPressed(intakeBall);
 
-    new JoystickButton(xbox, Button.kB.value)
+    new JoystickButton(monkey, 2)
       .whenPressed(index);
 
-    new JoystickButton(xbox, Button.kY.value)
+    new JoystickButton(monkey, 4)
       .whenPressed(shootOne);
 
-    new JoystickButton(xbox, Button.kX.value)
-      .whenPressed(bringUp);
-
-    new JoystickButton(xbox, Button.kStart.value)
+    new JoystickButton(monkey, 3)
       .whenPressed(shootAll);
+
+    new JoystickButton(monkey, 9)
+      .whenPressed(rotationControl);
+
+    new JoystickButton(monkey, 10)
+      .whenPressed(colorControl);
 
   }
 

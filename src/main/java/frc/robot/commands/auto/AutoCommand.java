@@ -19,10 +19,12 @@ public class AutoCommand extends SequentialCommandGroup {
    */
   public AutoCommand(Drive drive, Intake intake, Shooter shooter) {
     super(
+      new InstantCommand(() -> drive.posMode = true),
       new InstantCommand(() -> drive.driveToDist(2)),
       new WaitCommand(1),
       new InstantCommand(() -> drive.driveToDist(-2)),
       new WaitCommand(1),
+      new InstantCommand(() -> drive.posMode = false),
       new ShootAll(shooter, intake) 
     );
   }

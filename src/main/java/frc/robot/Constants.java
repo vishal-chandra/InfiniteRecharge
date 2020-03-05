@@ -13,6 +13,7 @@ public final class Constants {
 
     //OI
     public static int kXboxPort = 0;
+    public static int kMonkeyPort = 1;
 
     //Limit Switch Ports
     public static int kIntakeSwitchPort = 1;

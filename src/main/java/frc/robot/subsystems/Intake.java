@@ -74,7 +74,7 @@ public class Intake extends SubsystemBase {
   }
 
   public boolean ballAtTowerTop() {
-    return towerTopSwitch.get();
+    return !towerTopSwitch.get();
   }
 
   public char getTowerState() {
