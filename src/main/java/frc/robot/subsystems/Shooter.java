@@ -34,10 +34,15 @@ public class Shooter extends SubsystemBase {
   }
 
   public void startFlywheels() {
-    shooterTalon.set(ControlMode.PercentOutput, 0.85);
+    shooterTalon.set(ControlMode.Velocity, commandToTargetVelocity(0.85));
   }
 
   public double getRPM() {
     return shooterTalon.getSelectedSensorVelocity();
+  }
+
+  private double commandToTargetVelocity(double command) {
+    //see drive subsys for explanation
+    return command * maxShootRPM * 4096 / 600;
   }
 }
