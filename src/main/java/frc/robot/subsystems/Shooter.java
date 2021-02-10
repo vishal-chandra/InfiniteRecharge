@@ -22,6 +22,7 @@ public class Shooter extends SubsystemBase {
     shooterTalon.config_kP(0, shooterGains.kP, kTimeoutMs);
     shooterTalon.config_kI(0, shooterGains.kI, kTimeoutMs);
     shooterTalon.config_kD(0, shooterGains.kD, kTimeoutMs);
+    shooterTalon.configAllowableClosedloopError(0, shooterTolerance, kTimeoutMs);
 
     shooterFollower = new TalonSRX(kShooterFollowerID);
     shooterFollower.configFactoryDefault();
@@ -37,8 +38,8 @@ public class Shooter extends SubsystemBase {
     shooterTalon.set(ControlMode.Velocity, commandToTargetVelocity(0.85));
   }
 
-  public double getRPM() {
-    return shooterTalon.getSelectedSensorVelocity();
+  public double getError() {
+    return shooterTalon.getClosedLoopError(0);
   }
 
   private double commandToTargetVelocity(double command) {

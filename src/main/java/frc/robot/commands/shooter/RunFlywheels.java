@@ -39,8 +39,7 @@ public class RunFlywheels extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(shooter.getRPM() > shootVelocityThreshold) {
-      System.out.println("run flywheels finished");
+    if(shooter.getError() < shooterTolerance) {
       return true;
     }
     else return false;

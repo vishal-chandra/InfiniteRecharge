@@ -42,6 +42,8 @@ public final class Constants {
     //Motor Characteristics
     public static int maxDriveRPM = 567;
     public static int maxShootRPM = 500; //UNTESTED //UNTESTED
+    public static double shooterTolerance = 2500; //UNTESTED
+    
     public static int shootVelocityThreshold = 39000; //ticks per 100ms
 
     //max throttle change in a second
