@@ -109,6 +109,8 @@ public class ColorWheel extends SubsystemBase {
   }
 
   public boolean getSwitch() {
-    return !positionSwitch.get(); //the swtich needs to be flipped 
+    return positionSwitch.get(); //the swtich needs to be flipped -> !
+                                 //the switch was removed and is reading true ->!
+                                 //overal, no !
   }
 }
