@@ -18,6 +18,11 @@ public class Shooter extends SubsystemBase {
     shooterTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, kTimeoutMs);
     shooterTalon.setSensorPhase(true);
 
+    shooterTalon.config_kF(0, shooterGains.kF, kTimeoutMs);
+    shooterTalon.config_kP(0, shooterGains.kP, kTimeoutMs);
+    shooterTalon.config_kI(0, shooterGains.kI, kTimeoutMs);
+    shooterTalon.config_kD(0, shooterGains.kD, kTimeoutMs);
+
     shooterFollower = new TalonSRX(kShooterFollowerID);
     shooterFollower.configFactoryDefault();
     shooterFollower.setInverted(InvertType.FollowMaster);

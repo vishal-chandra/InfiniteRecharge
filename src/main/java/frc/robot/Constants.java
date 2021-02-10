@@ -58,4 +58,6 @@ public final class Constants {
 
     public static Gains leftPosGains = new Gains(0, 0.07, 0, 0);
     public static Gains rightPosGains = new Gains(0, 0.07, 0, 0);
+
+    public static Gains shooterGains = new Gains(0, 0, 0, 0);
 }
