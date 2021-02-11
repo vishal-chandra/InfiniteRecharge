@@ -41,10 +41,8 @@ public final class Constants {
 
     //Motor Characteristics
     public static int maxDriveRPM = 567;
-    public static int maxShootRPM = 500; //UNTESTED //UNTESTED
-    public static double shooterTolerance = 2500; //UNTESTED
-    
-    public static int shootVelocityThreshold = 39000; //ticks per 100ms
+    public static int maxShootRPM = 5710;
+    public static int shooterTolerance = 250; 
 
     //max throttle change in a second
     public static double kThrottleSlewRate = 1.3;
@@ -62,5 +60,5 @@ public final class Constants {
     public static Gains leftPosGains = new Gains(0, 0.07, 0, 0);
     public static Gains rightPosGains = new Gains(0, 0.07, 0, 0);
 
-    public static Gains shooterGains = new Gains(0, 0, 0, 0);
+    public static Gains shooterGains = new Gains(0.0223, 0, 0, 0);
 }

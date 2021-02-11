@@ -78,14 +78,17 @@ public class RobotContainer {
     new JoystickButton(xbox, Button.kA.value)
       .whenPressed(intakeBall);
 
+    new JoystickButton(xbox, Button.kX.value)
+      .whenPressed(new InstantCommand(() -> shooter.startFlywheels(), shooter));
+
     new JoystickButton(monkey, 2)
       .whenPressed(index);
 
     new JoystickButton(monkey, 4)
-      .whenPressed(shootOne);
+      .whenPressed(new InstantCommand(() -> shooter.startFlywheels(), shooter));
 
-    new JoystickButton(monkey, 3)
-      .whenPressed(shootAll);
+    new JoystickButton(xbox, Button.kY.value)
+      .whenPressed(new InstantCommand(() -> shooter.stopFlywheels(), shooter));
 
     new JoystickButton(monkey, 9)
       .whenPressed(rotationControl);

@@ -22,7 +22,7 @@ public class Shooter extends SubsystemBase {
     shooterTalon.config_kP(0, shooterGains.kP, kTimeoutMs);
     shooterTalon.config_kI(0, shooterGains.kI, kTimeoutMs);
     shooterTalon.config_kD(0, shooterGains.kD, kTimeoutMs);
-    shooterTalon.configAllowableClosedloopError(0, shooterTolerance, kTimeoutMs);
+    //shooterTalon.configAllowableClosedloopError(0, shooterTolerance, kTimeoutMs);
 
     shooterFollower = new TalonSRX(kShooterFollowerID);
     shooterFollower.configFactoryDefault();
@@ -35,7 +35,11 @@ public class Shooter extends SubsystemBase {
   }
 
   public void startFlywheels() {
-    shooterTalon.set(ControlMode.Velocity, commandToTargetVelocity(0.85));
+    shooterTalon.set(ControlMode.Velocity, commandToTargetVelocity(0.5));
+  }
+
+  public void flywheelsPct() {
+    shooterTalon.set(ControlMode.PercentOutput, 0.85);
   }
 
   public double getError() {
