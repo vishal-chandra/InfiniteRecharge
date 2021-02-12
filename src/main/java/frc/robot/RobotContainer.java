@@ -42,6 +42,7 @@ public class RobotContainer {
   ColorControl colorControl = new ColorControl(colorWheel);
 
   ShootOne shootOne = new ShootOne(shooter, intake);
+  ShootBall shootBall = new ShootBall(shooter, intake);
   ShootAll shootAll = new ShootAll(shooter, intake);
 
   private final AutoCommand m_autoCommand = new AutoCommand(drive, intake, shooter);
@@ -81,20 +82,11 @@ public class RobotContainer {
     new JoystickButton(xbox, Button.kX.value)
       .whenPressed(new InstantCommand(() -> shooter.startFlywheels(), shooter));
 
-    new JoystickButton(monkey, 2)
+    new JoystickButton(xbox, Button.kB.value)
       .whenPressed(index);
 
-    new JoystickButton(monkey, 4)
-      .whenPressed(new InstantCommand(() -> shooter.startFlywheels(), shooter));
-
     new JoystickButton(xbox, Button.kY.value)
-      .whenPressed(new InstantCommand(() -> shooter.stopFlywheels(), shooter));
-
-    new JoystickButton(monkey, 9)
-      .whenPressed(rotationControl);
-
-    new JoystickButton(monkey, 10)
-      .whenPressed(colorControl);
+      .whenPressed(shootBall);
 
   }
 
