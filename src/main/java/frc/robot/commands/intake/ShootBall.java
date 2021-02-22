@@ -8,6 +8,7 @@
 package frc.robot.commands.intake;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.shooter.RunFlywheels;
 import frc.robot.commands.intake.BringUp;
 import frc.robot.commands.intake.FeedBall;
@@ -20,6 +21,7 @@ public class ShootBall extends SequentialCommandGroup {
     super(
       new BringUp(intake),
       new RunFlywheels(shooter),
+      new WaitCommand(0.4), //avoid tolerance skip on way up
       new FeedBall(intake)
     );
   }

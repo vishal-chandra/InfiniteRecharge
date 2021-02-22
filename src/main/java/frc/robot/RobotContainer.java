@@ -80,13 +80,13 @@ public class RobotContainer {
       .whenPressed(intakeBall);
 
     new JoystickButton(xbox, Button.kX.value)
-      .whenPressed(new InstantCommand(() -> shooter.startFlywheels(), shooter));
+      .whenPressed(new InstantCommand(() -> shooter.stopFlywheels()));
 
     new JoystickButton(xbox, Button.kB.value)
       .whenPressed(index);
 
     new JoystickButton(xbox, Button.kY.value)
-      .whenPressed(shootBall);
+      .whenPressed(shootAll);
 
   }
 
