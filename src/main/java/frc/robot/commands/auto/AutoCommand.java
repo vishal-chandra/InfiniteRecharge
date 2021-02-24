@@ -9,7 +9,7 @@ package frc.robot.commands.auto;
 
 import edu.wpi.first.wpilibj2.command.*;
 import frc.robot.subsystems.*;
-import frc.robot.commands.intake.*;
+import frc.robot.commands.shooter.*;
 
 
 
@@ -25,7 +25,7 @@ public class AutoCommand extends SequentialCommandGroup {
       new InstantCommand(() -> drive.driveToDist(-2)),
       new WaitCommand(1),
       new InstantCommand(() -> drive.posMode = false),
-      new ShootAll(shooter, intake) 
+      new ShootAll(shooter, intake, 0.5) 
     );
   }
 }

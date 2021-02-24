@@ -5,6 +5,7 @@
 package frc.robot.commands.intake;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.subsystems.*;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -14,7 +15,7 @@ public class StopAll extends SequentialCommandGroup {
   /** Creates a new StopAll. */
   public StopAll(Shooter shooter, Intake intake) {
     addCommands(
-      new InstantCommand(() -> shooter.stopFlywheels(), intake),
+      new InstantCommand(() -> shooter.stopFlywheels(), shooter),
       new InstantCommand(() -> intake.stopIntake(), intake),
       new InstantCommand(() -> intake.stopTower(), intake)
     );
