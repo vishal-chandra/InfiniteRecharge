@@ -8,7 +8,6 @@
 package frc.robot.commands.shooter;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.*;
 import static frc.robot.Constants.*;
 
@@ -17,9 +16,9 @@ public class RunFlywheels extends CommandBase {
   Shooter shooter;
   double power;
 
-  public RunFlywheels(Shooter shooterSystem, double power) {
+  public RunFlywheels(Shooter shooterSystem, double _power) {
     shooter = shooterSystem;
-    this.power = power;
+    power = _power;
 
     addRequirements(shooter);
   }

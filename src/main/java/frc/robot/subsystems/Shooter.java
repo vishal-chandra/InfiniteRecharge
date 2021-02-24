@@ -35,14 +35,6 @@ public class Shooter extends SubsystemBase {
   }
 
   public void startFlywheels(double power) {
-
-    if(power < 0.0) { //out of range
-      power = 0.0;
-    }
-    else if(power > 1.0) { //out of range
-      power = 1.0;
-    }
-
     shooterTalon.set(ControlMode.Velocity, commandToTargetVelocity(power));
   }
 

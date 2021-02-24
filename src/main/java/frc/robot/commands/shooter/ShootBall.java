@@ -21,7 +21,7 @@ public class ShootBall extends SequentialCommandGroup {
     super(
       new BringUp(intake),
       new RunFlywheels(shooter, power),
-      new WaitCommand(0.4), //avoid tolerance skip on way up
+      new WaitCommand(0.6), //avoid tolerance skip on way up
       new FeedBall(intake)
     );
   }
