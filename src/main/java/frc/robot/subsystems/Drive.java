@@ -133,7 +133,7 @@ public class Drive extends SubsystemBase {
    * @param power desired speed as a number [-1.0, 1.0]
    * @param turn  desired curvature as a number [-1.0, 1.0]
    */
-  public void curvatureDrive(double power, double turn, boolean allowed) {
+  public void curvatureDrive(double power, double turn) {
 
     //adjust inputs
     double curvedPower = throttleRamp.calculate(curve(power));
@@ -173,20 +173,8 @@ public class Drive extends SubsystemBase {
 
     //send commands
     if(!posMode) {
-      if(!allowed) {
-        if(leftCommand > 0 && rightCommand > 0) {
-          leftTalon.set(ControlMode.Velocity, leftCommand);
-          rightTalon.set(ControlMode.Velocity, rightCommand);
-        }
-        else {
-          leftTalon.set(ControlMode.Velocity, commandToTargetVelocity(0.05));
-          rightTalon.set(ControlMode.Velocity, commandToTargetVelocity(0.05));
-        }
-      }
-      else {
-        leftTalon.set(ControlMode.Velocity, leftCommand);
-        rightTalon.set(ControlMode.Velocity, rightCommand);
-      }
+      leftTalon.set(ControlMode.Velocity, leftCommand);
+      rightTalon.set(ControlMode.Velocity, rightCommand);
     }
   }
 

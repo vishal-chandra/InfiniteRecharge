@@ -40,7 +40,7 @@ public class RobotContainer {
 
   RotationControl rotationControl = new RotationControl(colorWheel);
   ColorControl colorControl = new ColorControl(colorWheel);
-  
+
   ShootAll shootAll1 = new ShootAll(shooter, intake, 0.1);
   ShootAll shootAll2 = new ShootAll(shooter, intake, 0.2);
   ShootAll shootAll3 = new ShootAll(shooter, intake, 0.3);
@@ -64,8 +64,7 @@ public class RobotContainer {
       new RunCommand(
       () -> drive.curvatureDrive(
           xbox.getY(Hand.kLeft),
-          -xbox.getX(Hand.kRight),//for some reason this needs to be reversed
-          colorWheel.getSwitch()
+          -xbox.getX(Hand.kRight)
       ),
       drive)
     );
@@ -104,8 +103,6 @@ public class RobotContainer {
     //4
     new JoystickButton(xbox, Button.kY.value)
       .whenPressed(shootAll4);
-
-    
 
   }
 
