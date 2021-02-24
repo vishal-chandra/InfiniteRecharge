@@ -40,10 +40,13 @@ public class RobotContainer {
 
   RotationControl rotationControl = new RotationControl(colorWheel);
   ColorControl colorControl = new ColorControl(colorWheel);
+  
+  ShootAll shootAll1 = new ShootAll(shooter, intake, 0.1);
+  ShootAll shootAll2 = new ShootAll(shooter, intake, 0.2);
+  ShootAll shootAll3 = new ShootAll(shooter, intake, 0.3);
+  ShootAll shootAll4 = new ShootAll(shooter, intake, 0.4);
 
-  ShootOne shootOne = new ShootOne(shooter, intake);
-  ShootBall shootBall = new ShootBall(shooter, intake);
-  ShootAll shootAll = new ShootAll(shooter, intake);
+  StopAll stopAll = new StopAll(shooter, intake);
 
   private final AutoCommand m_autoCommand = new AutoCommand(drive, intake, shooter);
 
@@ -76,17 +79,33 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    new JoystickButton(xbox, Button.kA.value)
+    new JoystickButton(xbox, Button.kBumperRight.value)
       .whenPressed(intakeBall);
 
-    new JoystickButton(xbox, Button.kX.value)
-      .whenPressed(new InstantCommand(() -> shooter.stopFlywheels()));
-
-    new JoystickButton(xbox, Button.kB.value)
+    new JoystickButton(xbox, Button.kBumperLeft.value)
       .whenPressed(index);
 
+    new JoystickButton(xbox, Button.kBack.value)
+      .whenPressed(stopAll);
+
+    //shooting commands
+    //zone 1
+    new JoystickButton(xbox, Button.kB.value)
+      .whenPressed(shootAll1);
+
+    //2
+    new JoystickButton(xbox, Button.kA.value)
+      .whenPressed(shootAll2);
+
+    //3
+    new JoystickButton(xbox, Button.kX.value)
+      .whenPressed(shootAll3);
+
+    //4
     new JoystickButton(xbox, Button.kY.value)
-      .whenPressed(shootAll);
+      .whenPressed(shootAll4);
+
+    
 
   }
 

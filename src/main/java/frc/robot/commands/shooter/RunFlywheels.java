@@ -15,16 +15,19 @@ import static frc.robot.Constants.*;
 public class RunFlywheels extends CommandBase {
   
   Shooter shooter;
+  double power;
 
-  public RunFlywheels(Shooter shooterSystem) {
+  public RunFlywheels(Shooter shooterSystem, double power) {
     shooter = shooterSystem;
+    this.power = power;
+
     addRequirements(shooter);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    shooter.startFlywheels();
+    shooter.startFlywheels(power);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

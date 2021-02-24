@@ -17,10 +17,10 @@ import frc.robot.subsystems.*;
 
 public class ShootBall extends SequentialCommandGroup {
   
-  public ShootBall(Shooter shooter, Intake intake) {
+  public ShootBall(Shooter shooter, Intake intake, double power) {
     super(
       new BringUp(intake),
-      new RunFlywheels(shooter),
+      new RunFlywheels(shooter, power),
       new WaitCommand(0.4), //avoid tolerance skip on way up
       new FeedBall(intake)
     );

@@ -9,9 +9,9 @@ import frc.robot.commands.shooter.*;
 
 public class ShootOne extends SequentialCommandGroup {
 
-  public ShootOne(Shooter shooter, Intake intake) {
+  public ShootOne(Shooter shooter, Intake intake, double power) {
     super(
-      new ShootBall(shooter, intake),
+      new ShootBall(shooter, intake, power),
       new WaitCommand(0.2),
       new InstantCommand(() -> shooter.stopFlywheels(), intake),
       new InstantCommand(() -> intake.stopIntake(), intake),
