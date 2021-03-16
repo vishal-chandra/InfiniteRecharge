@@ -78,30 +78,30 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    new JoystickButton(xbox, Button.kBumperRight.value)
+    new JoystickButton(xbox, Button.kBumperRight.value) //intake
       .whenPressed(intakeBall);
 
-    new JoystickButton(xbox, Button.kBumperLeft.value)
+    new JoystickButton(xbox, Button.kBumperLeft.value) //tower
       .whenPressed(index);
 
-    new JoystickButton(xbox, Button.kBack.value)
+    new JoystickButton(xbox, Button.kBack.value) //stop all motors
       .whenPressed(stopAll);
 
     //shooting commands
     //zone 1
-    new JoystickButton(xbox, Button.kB.value)
+    new JoystickButton(xbox, Button.kA.value) //zone 1 shooting
       .whenPressed(shootAll1);
 
     //2
-    new JoystickButton(xbox, Button.kA.value)
+    new JoystickButton(xbox, Button.kY.value) //zone 2 shooting
       .whenPressed(shootAll2);
 
     //3
-    new JoystickButton(xbox, Button.kX.value)
+    new JoystickButton(xbox, Button.kX.value) //zone 3 shooting
       .whenPressed(shootAll3);
 
     //4
-    new JoystickButton(xbox, Button.kY.value)
+    new JoystickButton(xbox, Button.kB.value) //zone 4 shooting
       .whenPressed(shootAll4);
 
   }
