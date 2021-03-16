@@ -17,6 +17,7 @@ public class ShootAll extends SequentialCommandGroup {
       new WaitCommand(0.25),
       new Index(intake),
       new ShootBall(shooter, intake, power),
+      new WaitCommand(0.25),
       new InstantCommand(() -> shooter.stopFlywheels(), shooter),
       new InstantCommand(() -> intake.stopIntake(), intake),
       new InstantCommand(() -> intake.stopTower(), intake)
