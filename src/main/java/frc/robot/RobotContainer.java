@@ -41,10 +41,11 @@ public class RobotContainer {
   RotationControl rotationControl = new RotationControl(colorWheel);
   ColorControl colorControl = new ColorControl(colorWheel);
 
-  ShootAll shootAll1 = new ShootAll(shooter, intake, 0.825);
-  ShootAll shootAll2 = new ShootAll(shooter, intake, 0.75);
-  ShootAll shootAll3 = new ShootAll(shooter, intake, 0.78);
-  ShootAll shootAll4 = new ShootAll(shooter, intake, 0.87);
+  //make these constants
+  ShootAll shootAll1 = new ShootAll(shooter, intake, zone1ShooterPercent);
+  ShootAll shootAll2 = new ShootAll(shooter, intake, zone2ShooterPercent);
+  ShootAll shootAll3 = new ShootAll(shooter, intake, zone3ShooterPercent);
+  ShootAll shootAll4 = new ShootAll(shooter, intake, zone4ShooterPercent);
 
   StopAll stopAll = new StopAll(shooter, intake);
 

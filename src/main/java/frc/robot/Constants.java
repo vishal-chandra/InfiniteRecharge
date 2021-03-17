@@ -44,6 +44,12 @@ public final class Constants {
     public static int maxShootRPM = 5710;
     public static int shooterTolerance = 250; 
 
+    //Shooter Speeds
+    public static double zone1ShooterPercent = 0.74; 
+    public static double zone2ShooterPercent = 0.68;
+    public static double zone3ShooterPercent = 0.70;
+    public static double zone4ShooterPercent = 0.85;
+
     //max throttle change in a second
     public static double kThrottleSlewRate = 1.3;
     public static double kTurnSlewRate = 0.9;
