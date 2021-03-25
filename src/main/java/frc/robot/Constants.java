@@ -1,6 +1,6 @@
 package frc.robot;
 
-import frc.robot.Gains;
+import frc.robot.custom.Gains;
 
 
 /**
@@ -28,19 +28,16 @@ public final class Constants {
     public static int kIntakeTalonPort = 2;
     public static int kTowerTalonID  = 3;
     
-    public static int kLeftTalonID   = 9;
-    public static int kLeftFollowerID  = 2;
-    public static int kRightTalonID  = 6;
-    public static int kRightFollowerID = 1;
-
-    //switch ports
-    public static int kColorWheelSwitchPort = 0;
+    public static final int rightTalonPort = 1;
+    public static final int leftTalonPort  = 9;
+    public static final int rightTalonFollowerPort = 6;
+    public static final int leftVictorPort  = 2;
 
     //window to check for the completion of ctre methods
-    public static int kTimeoutMs = 30;
+    public static int kTimeoutMs = 50;
 
     //Motor Characteristics
-    public static int maxDriveRPM = 567;
+    public static int maxDriveRPM = 505;
     public static int maxShootRPM = 5710;
     public static int shooterTolerance = 250; 
 
@@ -50,9 +47,9 @@ public final class Constants {
     public static double zone3ShooterPercent = 0.70;
     public static double zone4ShooterPercent = 0.85;
 
-    //max throttle change in a second
-    public static double kThrottleSlewRate = 1.3;
-    public static double kTurnSlewRate = 0.9;
+    //ramp nums
+    public static double kThrottleSlewRate = 1.5;
+    public static double kTurnSlewRate = 1.8;
     public static double kShooterSlewRate = 1.0;
 
     public static double kFlywheelRatio = 1 / 8;
@@ -60,11 +57,8 @@ public final class Constants {
     
     //PID Gains (to be tuned)
     //gearing on new robot is 8.46:1
-    public static Gains leftDriveGains  = new Gains(0.2643, 0, 0, 0); 
-    public static Gains rightDriveGains = new Gains(0.2643, 0, 0, 0);
-
-    public static Gains leftPosGains = new Gains(0, 0.07, 0, 0);
-    public static Gains rightPosGains = new Gains(0, 0.07, 0, 0);
+    public static final Gains rightDriveGains = new Gains(0.294, 0.1, 0, 0);
+    public static final Gains leftDriveGains = new Gains(0.297, 0.15, 0, 0);
 
     public static Gains shooterGains = new Gains(0.0201, 0.01, 0.0000017, 0.00000013);
 }
