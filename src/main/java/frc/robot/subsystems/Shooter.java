@@ -10,7 +10,7 @@ import static frc.robot.Constants.*;
 
 public class Shooter extends SubsystemBase {
   
-  TalonSRX shooterTalon, shooterFollower;
+  public TalonSRX shooterTalon, shooterFollower;
 
   public Shooter() {
     shooterTalon = new TalonSRX(kShooterTalonID);
