@@ -10,13 +10,19 @@ import static frc.robot.Constants.*;
 
 public class Shooter extends SubsystemBase {
   
-  TalonSRX shooterTalon, shooterFollower;
+  public TalonSRX shooterTalon, shooterFollower;
 
   public Shooter() {
     shooterTalon = new TalonSRX(kShooterTalonID);
     shooterTalon.configFactoryDefault();
     shooterTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, kTimeoutMs);
     shooterTalon.setSensorPhase(true);
+
+    shooterTalon.config_kF(0, shooterGains.kF, kTimeoutMs);
+    shooterTalon.config_kP(0, shooterGains.kP, kTimeoutMs);
+    shooterTalon.config_kI(0, shooterGains.kI, kTimeoutMs);
+    shooterTalon.config_kD(0, shooterGains.kD, kTimeoutMs);
+    //shooterTalon.configAllowableClosedloopError(0, shooterTolerance, kTimeoutMs);
 
     shooterFollower = new TalonSRX(kShooterFollowerID);
     shooterFollower.configFactoryDefault();
@@ -28,11 +34,20 @@ public class Shooter extends SubsystemBase {
     shooterTalon.set(ControlMode.PercentOutput, 0.0);
   }
 
-  public void startFlywheels() {
+  public void startFlywheels(double power) {
+    shooterTalon.set(ControlMode.Velocity, commandToTargetVelocity(power));
+  }
+
+  public void flywheelsPct() {
     shooterTalon.set(ControlMode.PercentOutput, 0.85);
   }
 
-  public double getRPM() {
-    return shooterTalon.getSelectedSensorVelocity();
+  public double getError() {
+    return shooterTalon.getClosedLoopError(0);
+  }
+
+  private double commandToTargetVelocity(double command) {
+    //see drive subsys for explanation
+    return command * maxShootRPM * 4096 / 600;
   }
 }

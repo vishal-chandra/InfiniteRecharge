@@ -41,8 +41,13 @@ public class RobotContainer {
   RotationControl rotationControl = new RotationControl(colorWheel);
   ColorControl colorControl = new ColorControl(colorWheel);
 
-  ShootOne shootOne = new ShootOne(shooter, intake);
-  ShootAll shootAll = new ShootAll(shooter, intake);
+  //make these constants
+  ShootAll shootAll1 = new ShootAll(shooter, intake, zone1ShooterPercent);
+  ShootAll shootAll2 = new ShootAll(shooter, intake, zone2ShooterPercent);
+  ShootAll shootAll3 = new ShootAll(shooter, intake, zone3ShooterPercent);
+  ShootAll shootAll4 = new ShootAll(shooter, intake, zone4ShooterPercent);
+
+  StopAll stopAll = new StopAll(shooter, intake);
 
   private final AutoCommand m_autoCommand = new AutoCommand(drive, intake, shooter);
 
@@ -59,9 +64,8 @@ public class RobotContainer {
     drive.setDefaultCommand(
       new RunCommand(
       () -> drive.curvatureDrive(
-          xbox.getY(Hand.kLeft),
-          -xbox.getX(Hand.kRight),//for some reason this needs to be reversed
-          colorWheel.getSwitch()
+          -xbox.getY(Hand.kLeft),
+          xbox.getX(Hand.kRight)
       ),
       drive)
     );
@@ -75,23 +79,31 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    new JoystickButton(xbox, Button.kA.value)
+    new JoystickButton(xbox, Button.kBumperRight.value) //intake
       .whenPressed(intakeBall);
 
-    new JoystickButton(monkey, 2)
+    new JoystickButton(xbox, Button.kBumperLeft.value) //tower
       .whenPressed(index);
 
-    new JoystickButton(monkey, 4)
-      .whenPressed(shootOne);
+    new JoystickButton(xbox, Button.kBack.value) //stop all motors
+      .whenPressed(stopAll);
 
-    new JoystickButton(monkey, 3)
-      .whenPressed(shootAll);
+    //shooting commands
+    //zone 1
+    new JoystickButton(xbox, Button.kA.value) //zone 1 shooting
+      .whenPressed(shootAll1);
 
-    new JoystickButton(monkey, 9)
-      .whenPressed(rotationControl);
+    //2
+    new JoystickButton(xbox, Button.kY.value) //zone 2 shooting
+      .whenPressed(shootAll2);
 
-    new JoystickButton(monkey, 10)
-      .whenPressed(colorControl);
+    //3
+    new JoystickButton(xbox, Button.kX.value) //zone 3 shooting
+      .whenPressed(shootAll3);
+
+    //4
+    new JoystickButton(xbox, Button.kB.value) //zone 4 shooting
+      .whenPressed(shootAll4);
 
   }
 

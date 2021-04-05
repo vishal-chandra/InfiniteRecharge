@@ -14,16 +14,19 @@ import static frc.robot.Constants.*;
 public class RunFlywheels extends CommandBase {
   
   Shooter shooter;
+  double power;
 
-  public RunFlywheels(Shooter shooterSystem) {
+  public RunFlywheels(Shooter shooterSystem, double _power) {
     shooter = shooterSystem;
+    power = _power;
+
     addRequirements(shooter);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    shooter.startFlywheels();
+    shooter.startFlywheels(power);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -39,8 +42,7 @@ public class RunFlywheels extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(shooter.getRPM() > shootVelocityThreshold) {
-      System.out.println("run flywheels finished");
+    if(shooter.getError() < shooterTolerance) {
       return true;
     }
     else return false;

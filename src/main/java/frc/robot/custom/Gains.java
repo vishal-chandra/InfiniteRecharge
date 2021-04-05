@@ -1,4 +1,4 @@
-package frc.robot;
+package frc.robot.custom;
 
 /**
  * A simple container class for PID Gains

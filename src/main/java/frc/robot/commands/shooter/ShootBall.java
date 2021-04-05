@@ -5,9 +5,11 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.intake;
+package frc.robot.commands.shooter;
 
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.shooter.RunFlywheels;
 import frc.robot.commands.intake.BringUp;
 import frc.robot.commands.intake.FeedBall;
@@ -16,10 +18,16 @@ import frc.robot.subsystems.*;
 
 public class ShootBall extends SequentialCommandGroup {
   
-  public ShootBall(Shooter shooter, Intake intake) {
+  public ShootBall(Shooter shooter, Intake intake, double power) {
     super(
       new BringUp(intake),
-      new RunFlywheels(shooter),
+      new RunFlywheels(shooter, power),
+      new WaitCommand(1), //avoid tolerance skip on way up
+      new InstantCommand(
+        () -> System.out.println("Velocity: " + shooter.shooterTalon.getSelectedSensorVelocity() + 
+                                 " Voltage: " + shooter.shooterTalon.getMotorOutputVoltage()),  
+        shooter
+      ),
       new FeedBall(intake)
     );
   }
