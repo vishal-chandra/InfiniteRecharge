@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.ctre.phoenix.sensors.PigeonIMU;
 
 import static frc.robot.Constants.*;
 
@@ -21,8 +22,10 @@ public class Drive extends SubsystemBase {
   WPI_VeloTalon leftTalon, rightTalon;
   WPI_TalonSRX rightTalonFollower;
   WPI_VictorSPX leftVictor;
-
   DifferentialDrive drivetrain;
+
+  PigeonIMU gyro;
+  double[] ypr = {0, 0, 0};
 
   SlewRateLimiter throttleRamp, turnRamp;
 
@@ -54,6 +57,12 @@ public class Drive extends SubsystemBase {
     //slew rate setup
     throttleRamp = new SlewRateLimiter(kThrottleSlewRate);
     turnRamp = new SlewRateLimiter(kTurnSlewRate);
+
+    //gyro setup
+    gyro = new PigeonIMU(rightTalonFollower);
+    gyro.setYaw(0);
+    gyro.setFusedHeading(0);
+
   }
 
   public void curvatureDrive(double power, double turn) {
@@ -71,9 +80,16 @@ public class Drive extends SubsystemBase {
     return Math.abs(input) * input;
   }
 
+  public double getAngle() {
+    gyro.getYawPitchRoll(ypr);
+    return ypr[0];
+  }
+
   public void periodic() {
-    System.out.println("L vel " + leftTalon.getSelectedSensorVelocity() + "  R vel: " + rightTalon.getSelectedSensorVelocity() +
-                       "L targ " + leftTalon.getClosedLoopTarget(0) + " R targ: " + rightTalon.getClosedLoopTarget());
+    // System.out.println("L vel " + leftTalon.getSelectedSensorVelocity() + "  R vel: " + rightTalon.getSelectedSensorVelocity() +
+    //                    "L targ " + leftTalon.getClosedLoopTarget(0) + " R targ: " + rightTalon.getClosedLoopTarget());
+
+    System.out.println(getAngle());
   }
 
 
