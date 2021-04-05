@@ -39,19 +39,19 @@ public final class Constants {
 
     //Motor Characteristics
     public static int maxDriveRPM = 505;
-    public static double maxShootRPM = 5710 * 0.77;
+    public static double maxShootRPM = 5710 * 0.86; //0.77 -> 0.85 -> 0.86
     public static int shooterTolerance = 250; 
 
     //Shooter Speeds (%max rpm)
-    public static double zone1ShooterPercent = 0.95; //0.78 / 0.85;
-    public static double zone2ShooterPercent = 0.83; 
-    public static double zone3ShooterPercent = 0.86;
-    public static double zone4ShooterPercent = 1.0; //80
+    public static double zone1ShooterPercent = 1.0; //0.95
+    public static double zone2ShooterPercent = 0.855; //0.83 -> 0.85 -> 0.86 -> 0.855 
+    public static double zone3ShooterPercent = 0.89; //0.86 -> 0.87 -> 0.88 -> 0.89
+    public static double zone4ShooterPercent = 0.98; //1.0
 
     //ramp nums
     public static double kThrottleSlewRate = 1.5;
-    public static double kTurnSlewRate = 1.8;
-    public static double kShooterSlewRate = 1.0;
+    public static double kTurnSlewRate = 1.0;
+    public static double kShooterSlewRate = 1.5;
 
     public static double kFlywheelRatio = 1 / 8;
 

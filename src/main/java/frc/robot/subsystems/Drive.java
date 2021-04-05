@@ -57,8 +57,8 @@ public class Drive extends SubsystemBase {
   }
 
   public void curvatureDrive(double power, double turn) {
-    double adjPower = throttleRamp.calculate(curve(power));
-    double adjTurn = turnRamp.calculate(curve(turn));
+    double adjPower = throttleRamp.calculate(curve(power) / 2.5);
+    double adjTurn = turnRamp.calculate(curve(turn) / 4);
 
     //send adjusted values to motors
     drivetrain.curvatureDrive(adjPower, adjTurn, true);
