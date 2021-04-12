@@ -89,7 +89,21 @@ public class Drive extends SubsystemBase {
     // System.out.println("L vel " + leftTalon.getSelectedSensorVelocity() + "  R vel: " + rightTalon.getSelectedSensorVelocity() +
     //                    "L targ " + leftTalon.getClosedLoopTarget(0) + " R targ: " + rightTalon.getClosedLoopTarget());
 
-    System.out.println(getAngle());
+    System.out.println(moddedAngle(getAngle()));
+    
+  }
+
+  public double moddedAngle(double angle) {
+    
+    int rotations;
+    if(angle < 0) rotations = 1 + Math.abs((int) (angle / 360));
+    else rotations = (int) (angle / 360);
+    
+    if(angle < 0) angle += rotations * 360;
+    else angle -= rotations * 360;
+
+    if(angle > 180) angle -= 360;
+    return angle;
   }
 
 
