@@ -12,6 +12,8 @@ import edu.wpi.first.wpilibj.XboxController.Button;
 import frc.robot.commands.intake.*;
 import frc.robot.commands.shooter.*;
 import frc.robot.commands.auto.*;
+import frc.robot.commands.drive.*;
+
 import frc.robot.commands.colorwheel.ColorControl;
 import frc.robot.commands.colorwheel.RotationControl;
 import frc.robot.subsystems.*;
@@ -49,6 +51,9 @@ public class RobotContainer {
 
   StopAll stopAll = new StopAll(shooter, intake);
 
+  //snap command
+  AutoRotate autoRotate = new AutoRotate(drive);
+
   private final AutoCommand m_autoCommand = new AutoCommand(drive, intake, shooter);
 
 
@@ -61,14 +66,14 @@ public class RobotContainer {
 
     //this block sets up the background driving function
     //constantly look at the sticks and pass them to drivebase
-    drive.setDefaultCommand(
-      new RunCommand(
-      () -> drive.curvatureDrive(
-          -xbox.getY(Hand.kLeft),
-          xbox.getX(Hand.kRight)
-      ),
-      drive)
-    );
+    // drive.setDefaultCommand(
+    //   new RunCommand(
+    //   () -> drive.curvatureDrive(
+    //       -xbox.getY(Hand.kLeft),
+    //       xbox.getX(Hand.kRight)
+    //   ),
+    //   drive)
+    // );
   }
 
   /**
@@ -90,8 +95,8 @@ public class RobotContainer {
 
     //shooting commands
     //zone 1
-    new JoystickButton(xbox, Button.kA.value) //zone 1 shooting
-      .whenPressed(shootAll1);
+    // new JoystickButton(xbox, Button.kA.value) //zone 1 shooting
+    //   .whenPressed(shootAll1);
 
     //2
     new JoystickButton(xbox, Button.kY.value) //zone 2 shooting
@@ -104,6 +109,9 @@ public class RobotContainer {
     //4
     new JoystickButton(xbox, Button.kB.value) //zone 4 shooting
       .whenPressed(shootAll4);
+
+    new JoystickButton(xbox, Button.kA.value)
+      .whenPressed(autoRotate);
 
   }
 

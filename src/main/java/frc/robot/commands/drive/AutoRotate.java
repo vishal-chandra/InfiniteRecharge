@@ -14,6 +14,7 @@ public class AutoRotate extends CommandBase {
 
   Drive drive;
   double kP = 0.0039;
+  double feedforward = 0.4;
   double errorThreshold = 2;
 
   /**
@@ -29,14 +30,14 @@ public class AutoRotate extends CommandBase {
   @Override
   public void execute() {
     double error = getError();
-    double turnPower = kP * error;
+    double turnPower = kP * error + feedforward * error / Math.abs(error);
     drive.curvatureDrive(0, turnPower);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(getError() < errorThreshold) return true;
+    if(Math.abs(getError()) < errorThreshold) return true;
     return false;
   }
 
