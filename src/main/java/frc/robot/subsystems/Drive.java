@@ -82,19 +82,8 @@ public class Drive extends SubsystemBase {
 
   public double getAngle() {
     gyro.getYawPitchRoll(ypr);
-    return ypr[0];
-  }
+    double angle = ypr[0];
 
-  public void periodic() {
-    // System.out.println("L vel " + leftTalon.getSelectedSensorVelocity() + "  R vel: " + rightTalon.getSelectedSensorVelocity() +
-    //                    "L targ " + leftTalon.getClosedLoopTarget(0) + " R targ: " + rightTalon.getClosedLoopTarget());
-
-    System.out.println(moddedAngle(getAngle()));
-    
-  }
-
-  public double moddedAngle(double angle) {
-    
     int rotations;
     if(angle < 0) rotations = 1 + Math.abs((int) (angle / 360));
     else rotations = (int) (angle / 360);
@@ -106,5 +95,14 @@ public class Drive extends SubsystemBase {
     return angle;
   }
 
+  public void periodic() {
+    // System.out.println("L vel " + leftTalon.getSelectedSensorVelocity() + "  R vel: " + rightTalon.getSelectedSensorVelocity() +
+    //                    "L targ " + leftTalon.getClosedLoopTarget(0) + " R targ: " + rightTalon.getClosedLoopTarget());
+
+    System.out.println(getAngle());
+
+  }
+
+  
 
 }
